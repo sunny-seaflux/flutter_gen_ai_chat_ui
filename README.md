@@ -411,6 +411,17 @@ controller.loadMore(() async {
 
 Check the [example](example) directory for complete sample applications showcasing different features.
 
+## Development & Contributing
+
+We welcome contributions to improve the Flutter Gen AI Chat UI package! 
+
+Before submitting a pull request:
+1. Ensure your code follows the project style guidelines
+2. Add tests for any new features
+3. Update documentation as needed
+
+For maintainers releasing new versions, please refer to our [release checklist](doc/release_checklist.md) to ensure all necessary steps are completed before publishing.
+
 ## License
 
 [MIT License](LICENSE)
