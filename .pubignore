@@ -1,32 +1,37 @@
-# Files that should not be published
+# Excluded from pub package
 .cursor/
 .flutter-plugins
 .flutter-plugins-dependencies
 files_list.md
 logger.txt
-context.md
+
+# Git files
+.git/
+.github/
+.gitignore
+
+# Project files
+.metadata
+.packages
+pubspec.lock
+.dart_tool/
+
+# Test and coverage files
+coverage/
+.test_coverage.dart
+
+# Misc
+*.log
+.DS_Store
 
 # Test files
 test/goldens/
 test/visual/failures/
-
-# Build artifacts
-build/
-.dart_tool/
-
-# Development files
-.packages
-pubspec.lock
 
 # IDE files
 .idea/
 .vscode/
 *.iml
 
-# Logs and temporary files
-*.log
-.DS_Store
-
-# Test coverage
-coverage/
-test/.test_coverage.dart 
+# Context files
+context.md 

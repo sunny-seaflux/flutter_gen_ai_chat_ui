@@ -1,0 +1,237 @@
+import 'package:flutter/material.dart';
+
+/// The main navigation page for all Flutter Gen AI Chat UI examples
+class ExamplesHomeScreen extends StatelessWidget {
+  const ExamplesHomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter Gen AI Chat UI'),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        elevation: 0,
+      ),
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: _buildHeader(context),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.all(16.0),
+              sliver: SliverGrid(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16.0,
+                  crossAxisSpacing: 16.0,
+                  childAspectRatio: 0.8,
+                ),
+                delegate: SliverChildListDelegate([
+                  _buildExampleCard(
+                    context,
+                    title: 'Basic',
+                    description: 'Simple chat UI with essential features',
+                    icon: Icons.chat_bubble_outline,
+                    color: Colors.blue,
+                    routeName: '/basic',
+                  ),
+                  _buildExampleCard(
+                    context,
+                    title: 'Intermediate',
+                    description: 'Chat UI with markdown and streaming',
+                    icon: Icons.mark_chat_read_outlined,
+                    color: Colors.green,
+                    routeName: '/intermediate',
+                  ),
+                  _buildExampleCard(
+                    context,
+                    title: 'Advanced',
+                    description: 'Full-featured chat with custom themes',
+                    icon: Icons.smart_toy_outlined,
+                    color: Colors.purple,
+                    routeName: '/advanced',
+                  ),
+                  _buildExampleCard(
+                    context,
+                    title: 'Specialized',
+                    description: 'Industry-specific implementations',
+                    icon: Icons.diversity_3,
+                    color: Colors.orange,
+                    routeName: '/specialized',
+                  ),
+                ]),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: _buildFeaturesSection(context),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(24.0),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primaryContainer,
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(24),
+          bottomRight: Radius.circular(24),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Example Gallery',
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Explore different implementations of the Flutter Gen AI Chat UI package',
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onPrimaryContainer
+                      .withOpacity(0.8),
+                ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildExampleCard(
+    BuildContext context, {
+    required String title,
+    required String description,
+    required IconData icon,
+    required Color color,
+    required String routeName,
+  }) {
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, routeName);
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 100,
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.2),
+              ),
+              child: Center(
+                child: Icon(
+                  icon,
+                  size: 48,
+                  color: color,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    description,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).textTheme.bodySmall?.color,
+                        ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Explore',
+                        style: TextStyle(
+                          color: color,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward,
+                        size: 16,
+                        color: color,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFeaturesSection(BuildContext context) {
+    final features = [
+      {'icon': Icons.dark_mode, 'label': 'Dark & Light Themes'},
+      {'icon': Icons.animation, 'label': 'Streaming Animations'},
+      {'icon': Icons.format_align_left, 'label': 'Markdown Support'},
+      {'icon': Icons.emoji_emotions, 'label': 'Message Reactions'},
+      {'icon': Icons.code, 'label': 'Code Highlighting'},
+      {'icon': Icons.mic, 'label': 'Voice Input'},
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Key Features',
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 12,
+          runSpacing: 12,
+          children: features.map((feature) {
+            return Chip(
+              avatar: Icon(
+                feature['icon'] as IconData,
+                size: 18,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              label: Text(feature['label'] as String),
+              backgroundColor:
+                  Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+}

@@ -1,16 +1,17 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'dart:ui'; // Add this import for ImageFilter
 import 'package:provider/provider.dart';
 
-import '../models/app_state.dart';
+import '../../../models/app_state.dart';
 
-class SettingsDrawer extends StatelessWidget {
-  const SettingsDrawer({super.key});
+/// Settings drawer for the advanced example with extensive customization options
+class AdvancedSettingsDrawer extends StatelessWidget {
+  const AdvancedSettingsDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final colorScheme = Theme.of(context).colorScheme;
 
     return Drawer(
@@ -18,7 +19,7 @@ class SettingsDrawer extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
-          color: isDarkMode
+          color: isDark
               ? Colors.black.withOpacity(0.85)
               : Colors.white.withOpacity(0.9),
           borderRadius: const BorderRadius.only(
@@ -45,7 +46,7 @@ class SettingsDrawer extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   children: [
                     _buildSectionHeader(context, 'Display Settings'),
-                    _buildAnimatedSettingTile(
+                    _buildSwitchTile(
                       context: context,
                       title: 'Dark Mode',
                       subtitle: 'Toggle between light and dark themes',
@@ -59,7 +60,7 @@ class SettingsDrawer extends StatelessWidget {
                     const Divider(indent: 72, endIndent: 20),
 
                     _buildSectionHeader(context, 'Chat Features'),
-                    _buildAnimatedSettingTile(
+                    _buildSwitchTile(
                       context: context,
                       title: 'Text Streaming',
                       subtitle: 'Enable word-by-word streaming of responses',
@@ -70,7 +71,7 @@ class SettingsDrawer extends StatelessWidget {
                       icon: Icons.text_format_rounded,
                       color: colorScheme.primary,
                     ),
-                    _buildAnimatedSettingTile(
+                    _buildSwitchTile(
                       context: context,
                       title: 'Animations',
                       subtitle: 'Enable animations throughout the UI',
@@ -81,7 +82,7 @@ class SettingsDrawer extends StatelessWidget {
                       icon: Icons.animation_rounded,
                       color: colorScheme.tertiary,
                     ),
-                    _buildAnimatedSettingTile(
+                    _buildSwitchTile(
                       context: context,
                       title: 'Code Blocks',
                       subtitle: 'Enable code block formatting in responses',
@@ -92,7 +93,7 @@ class SettingsDrawer extends StatelessWidget {
                       icon: Icons.code_rounded,
                       color: colorScheme.secondary,
                     ),
-                    _buildAnimatedSettingTile(
+                    _buildSwitchTile(
                       context: context,
                       title: 'Welcome Message',
                       subtitle: 'Show welcome message on startup',
@@ -103,7 +104,7 @@ class SettingsDrawer extends StatelessWidget {
                       icon: Icons.chat_bubble_outline_rounded,
                       color: Colors.green,
                     ),
-                    _buildAnimatedSettingTile(
+                    _buildSwitchTile(
                       context: context,
                       title: 'Persistent Questions',
                       subtitle:
@@ -119,7 +120,7 @@ class SettingsDrawer extends StatelessWidget {
 
                     // UI Customization
                     _buildSectionHeader(context, 'UI Customization'),
-                    _buildSliderSettingTile(
+                    _buildSliderTile(
                       context: context,
                       title: 'Chat Width',
                       subtitle: 'Maximum width of the chat interface',
@@ -133,21 +134,7 @@ class SettingsDrawer extends StatelessWidget {
                       icon: Icons.width_normal_rounded,
                       color: colorScheme.primary,
                     ),
-                    _buildSliderSettingTile(
-                      context: context,
-                      title: 'Font Size',
-                      subtitle: 'Size of text in messages',
-                      value: appState.fontSize,
-                      min: 12,
-                      max: 18,
-                      divisions: 6,
-                      onChanged: (value) {
-                        appState.setFontSize(value);
-                      },
-                      icon: Icons.format_size_rounded,
-                      color: colorScheme.secondary,
-                    ),
-                    _buildSliderSettingTile(
+                    _buildSliderTile(
                       context: context,
                       title: 'Bubble Radius',
                       subtitle: 'Roundness of message bubbles',
@@ -163,95 +150,18 @@ class SettingsDrawer extends StatelessWidget {
                     ),
                     const Divider(indent: 72, endIndent: 20),
 
-                    // Help section
-                    _buildSectionHeader(context, 'Help & About'),
+                    // About section
+                    _buildSectionHeader(context, 'About'),
                     _buildInfoTile(
                       context: context,
-                      title: 'About Dila Assistant',
-                      subtitle: 'Learn more about Flutter Gen AI Chat UI',
+                      title: 'Flutter Gen AI Chat UI',
+                      subtitle: 'A customizable AI chat interface for Flutter',
                       icon: Icons.info_outline_rounded,
                       color: colorScheme.primary,
-                      onTap: () {
-                        showAboutDialog(
-                          context: context,
-                          applicationName: 'Dila Assistant Demo',
-                          applicationVersion: '1.0.0',
-                          applicationIcon: Container(
-                            width: 48,
-                            height: 48,
-                            decoration: BoxDecoration(
-                              color: colorScheme.primary,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.chat_rounded,
-                                color: Colors.white,
-                                size: 28,
-                              ),
-                            ),
-                          ),
-                          applicationLegalese: '© 2023 Flutter Gen AI Chat UI',
-                          children: [
-                            const SizedBox(height: 16),
-                            Card(
-                              elevation: 0,
-                              color: isDarkMode
-                                  ? Colors.white10
-                                  : colorScheme.primary.withOpacity(0.1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'This demo showcases the features of the Flutter Gen AI Chat UI package, a customizable chat interface for AI applications.',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      'Features:',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: colorScheme.primary,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    _buildFeatureItem(context, 'Modern Design'),
-                                    _buildFeatureItem(
-                                        context, 'Markdown Support'),
-                                    _buildFeatureItem(
-                                        context, 'Code Highlighting'),
-                                    _buildFeatureItem(
-                                        context, 'Streaming Text'),
-                                    _buildFeatureItem(
-                                        context, 'Dark Mode Support'),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
                     ),
                     _buildInfoTile(
                       context: context,
-                      title: 'View Documentation',
-                      subtitle: 'Read the package documentation',
-                      icon: Icons.menu_book_rounded,
-                      color: Colors.green,
-                      onTap: () {
-                        // TODO: Open documentation
-                      },
-                    ),
-                    _buildInfoTile(
-                      context: context,
-                      title: 'Reset All Settings',
+                      title: 'Reset Settings',
                       subtitle: 'Restore default settings',
                       icon: Icons.restore_rounded,
                       color: Colors.red,
@@ -261,7 +171,7 @@ class SettingsDrawer extends StatelessWidget {
                           builder: (context) => AlertDialog(
                             title: const Text('Reset Settings?'),
                             content: const Text(
-                              'This will restore all settings to their default values. This action cannot be undone.',
+                              'This will restore all settings to their default values.',
                             ),
                             actions: [
                               TextButton(
@@ -272,13 +182,6 @@ class SettingsDrawer extends StatelessWidget {
                                 onPressed: () {
                                   appState.resetToDefaults();
                                   Navigator.pop(context);
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content:
-                                          Text('Settings reset to defaults'),
-                                      behavior: SnackBarBehavior.floating,
-                                    ),
-                                  );
                                 },
                                 child: const Text('RESET'),
                               ),
@@ -296,32 +199,13 @@ class SettingsDrawer extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Version 1.0.0',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color:
-                              isDarkMode ? Colors.grey[400] : Colors.grey[600]),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: colorScheme.primary.withOpacity(0.5),
-                          width: 1,
-                        ),
-                      ),
-                      child: Text(
-                        'Dila UI',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: colorScheme.primary,
-                        ),
+                      'Advanced Example v1.0.0',
+                      style: TextStyle(
+                        color: isDark ? Colors.grey[400] : Colors.grey[600],
+                        fontSize: 12,
                       ),
                     ),
                   ],
@@ -334,6 +218,7 @@ class SettingsDrawer extends StatelessWidget {
     );
   }
 
+  /// Header section of the settings drawer
   Widget _buildHeader(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -392,7 +277,7 @@ class SettingsDrawer extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Customize your Dila chat experience',
+            'Customize your chat experience',
             style: TextStyle(
               color: Colors.white.withOpacity(0.8),
               fontSize: 14,
@@ -403,6 +288,7 @@ class SettingsDrawer extends StatelessWidget {
     );
   }
 
+  /// Section header
   Widget _buildSectionHeader(BuildContext context, String title) {
     return Padding(
       padding: const EdgeInsets.only(left: 20, top: 24, bottom: 8, right: 20),
@@ -418,7 +304,8 @@ class SettingsDrawer extends StatelessWidget {
     );
   }
 
-  Widget _buildAnimatedSettingTile({
+  /// Switch setting tile
+  Widget _buildSwitchTile({
     required BuildContext context,
     required String title,
     required String subtitle,
@@ -462,7 +349,8 @@ class SettingsDrawer extends StatelessWidget {
     );
   }
 
-  Widget _buildSliderSettingTile({
+  /// Slider setting tile
+  Widget _buildSliderTile({
     required BuildContext context,
     required String title,
     required String subtitle,
@@ -534,13 +422,14 @@ class SettingsDrawer extends StatelessWidget {
     );
   }
 
+  /// Info tile
   Widget _buildInfoTile({
     required BuildContext context,
     required String title,
     required String subtitle,
     required IconData icon,
     required Color color,
-    required VoidCallback onTap,
+    VoidCallback? onTap,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -565,34 +454,16 @@ class SettingsDrawer extends StatelessWidget {
             color: Theme.of(context).textTheme.bodySmall?.color,
           ),
         ),
-        trailing: Icon(
-          Icons.chevron_right_rounded,
-          color: Theme.of(context).colorScheme.primary,
-        ),
+        trailing: onTap != null
+            ? Icon(
+                Icons.chevron_right_rounded,
+                color: Theme.of(context).colorScheme.primary,
+              )
+            : null,
         onTap: onTap,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-      ),
-    );
-  }
-
-  Widget _buildFeatureItem(BuildContext context, String feature) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 4),
-      child: Row(
-        children: [
-          Icon(
-            Icons.check_circle,
-            size: 16,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          const SizedBox(width: 8),
-          Text(
-            feature,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ],
       ),
     );
   }

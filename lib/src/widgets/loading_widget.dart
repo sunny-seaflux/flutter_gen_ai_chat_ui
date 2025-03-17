@@ -259,16 +259,16 @@ class _LoadingWidgetState extends State<LoadingWidget> {
         widget.containerDecoration != null;
 
     // Get the text direction from context for proper alignment
-    final TextDirection textDirection = Directionality.of(context);
+    final textDirection = Directionality.of(context);
 
     // Determine alignment based on text direction if not explicitly provided
-    final Alignment effectiveAlignment = widget.alignment ??
+    final effectiveAlignment = widget.alignment ??
         (textDirection == TextDirection.rtl
             ? Alignment.centerRight
             : Alignment.centerLeft);
 
     // Create the shimmer text content
-    Widget textContent = Shimmer.fromColors(
+    final textContent = Shimmer.fromColors(
       baseColor: baseColor,
       highlightColor: highlightColor,
       child: AnimatedSwitcher(

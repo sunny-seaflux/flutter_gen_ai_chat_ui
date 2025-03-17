@@ -349,7 +349,7 @@ class _AiChatWidgetState extends State<AiChatWidget>
                 // Position welcome message as an overlay on top
                 if (widget.controller.showWelcomeMessage)
                   Container(
-                    color: Colors.black.withOpacity(0.03),
+                    color: Colors.black.withValues(alpha: 0.03),
                     child: Center(
                       child: SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
