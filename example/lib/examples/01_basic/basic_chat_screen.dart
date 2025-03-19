@@ -30,24 +30,22 @@ class _BasicChatScreenState extends State<BasicChatScreen> {
 
   // Example questions for the welcome message
   final _exampleQuestions = [
-    ExampleQuestion(question: "What can you help me with?"),
-    ExampleQuestion(question: "Tell me about Flutter"),
-    ExampleQuestion(question: "How does this UI work?"),
-    ExampleQuestion(question: "Show me some examples"),
+    const ExampleQuestion(question: "What can you help me with?"),
+    const ExampleQuestion(question: "Tell me about Flutter"),
+    const ExampleQuestion(question: "How does this UI work?"),
+    const ExampleQuestion(question: "Show me some examples"),
   ];
 
   @override
   void initState() {
     super.initState();
 
-    // Add a welcome message to the chat
-    _chatController.addMessage(
-      ChatMessage(
-        text: "👋 Hello! I'm your AI assistant. How can I help you today?",
-        user: _aiUser,
-        createdAt: DateTime.now(),
-      ),
-    );
+    // Instead of adding a welcome message directly to the chat,
+    // we'll use the welcome message feature with example questions
+    // The controller's showWelcomeMessage property controls this
+    _chatController.showWelcomeMessage = true;
+
+    // No initial messages added to chat
   }
 
   @override
@@ -59,13 +57,18 @@ class _BasicChatScreenState extends State<BasicChatScreen> {
 
   /// Handle sending a user message and generating a response
   Future<void> _handleSendMessage(ChatMessage message) async {
+    // Hide welcome message if it's currently shown
+    if (_chatController.showWelcomeMessage) {
+      _chatController.hideWelcomeMessage();
+    }
+
+    // Add the user's message to the chat
+    _chatController.addMessage(message);
+
     // Set loading state to show typing indicator
     setState(() => _isLoading = true);
 
     try {
-      // Get app state for configuration
-      final appState = Provider.of<AppState>(context, listen: false);
-
       // Simulate API call to generate response
       final response = await _aiService.generateResponse(message.text,
           includeCodeBlock: false);
@@ -108,16 +111,10 @@ class _BasicChatScreenState extends State<BasicChatScreen> {
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: () {
+              // Clear all messages
               _chatController.clearMessages();
-              // Re-add the welcome message
-              _chatController.addMessage(
-                ChatMessage(
-                  text:
-                      "👋 Hello! I'm your AI assistant. How can I help you today?",
-                  user: _aiUser,
-                  createdAt: DateTime.now(),
-                ),
-              );
+              // Show the welcome message again
+              _chatController.showWelcomeMessage = true;
             },
             tooltip: 'Reset conversation',
           ),
@@ -133,28 +130,92 @@ class _BasicChatScreenState extends State<BasicChatScreen> {
         // Loading state
         loadingConfig: LoadingConfig(
           isLoading: _isLoading,
+          loadingIndicator: LoadingWidget(
+            texts: [
+              'Generating response...',
+              'Thinking...',
+              'Loading...',
+              'Please wait...',
+              'Loading...',
+            ],
+            shimmerBaseColor: Colors.grey,
+            shimmerHighlightColor: Colors.black38,
+          ),
         ),
 
         // Welcome message configuration
-        welcomeMessageConfig: const WelcomeMessageConfig(
-          title: "Welcome to the Basic Example",
-          questionsSectionTitle: "Try asking:",
+        welcomeMessageConfig: WelcomeMessageConfig(
+          title: "Welcome to the AI Chat",
+          titleStyle: TextStyle(
+            fontSize: 26,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          questionsSectionTitle: "Try asking these questions:",
+          questionsSectionTitleStyle: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+          containerPadding: const EdgeInsets.all(24),
+          questionsSectionPadding: const EdgeInsets.all(16),
+          containerDecoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 10,
+                spreadRadius: -5,
+              ),
+            ],
+            border: Border.all(
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+              width: 1.5,
+            ),
+          ),
         ),
 
-        // Example questions to display in the welcome message
-        exampleQuestions: _exampleQuestions,
+        // Example questions to display in the welcome message with enhanced styling
+        exampleQuestions: _exampleQuestions
+            .map((q) => ExampleQuestion(
+                  question: q.question,
+                  config: ExampleQuestionConfig(
+                    iconData: Icons.chat_bubble_outline_rounded,
+                    textStyle: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                    containerPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    iconColor: Theme.of(context).colorScheme.primary,
+                  ),
+                ))
+            .toList(),
 
         // Input configuration
-        inputOptions: const InputOptions(
-          unfocusOnTapOutside:
-              false, // Prevents focus loss when tapping outside
-          sendOnEnter: true, // Enter key sends the message
-          decoration: InputDecoration(
+        inputOptions: InputOptions(
+          containerPadding: const EdgeInsets.all(16),
+          materialPadding: const EdgeInsets.all(16),
+          minLines: 1,
+          maxLines: 4,
+          positionedBottom: 10,
+          positionedLeft: 10,
+          positionedRight: 10,
+          unfocusOnTapOutside: false,
+          sendOnEnter: true,
+          textInputAction: TextInputAction.send,
+          textController: _buildTextControllerWithEnterHandler(),
+          decoration: const InputDecoration(
             hintText: 'Type a message...',
             border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(24)),
               borderSide: BorderSide.none,
             ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             filled: true,
           ),
         ),
@@ -164,7 +225,8 @@ class _BasicChatScreenState extends State<BasicChatScreen> {
           showUserName: true,
           bubbleStyle: BubbleStyle(
             userBubbleColor: Theme.of(context).colorScheme.primaryContainer,
-            aiBubbleColor: Theme.of(context).colorScheme.surfaceVariant,
+            aiBubbleColor:
+                Theme.of(context).colorScheme.surfaceContainerHighest,
           ),
         ),
 
@@ -172,5 +234,23 @@ class _BasicChatScreenState extends State<BasicChatScreen> {
         enableAnimation: appState.enableAnimation,
       ),
     );
+  }
+
+  TextEditingController _buildTextControllerWithEnterHandler() {
+    final controller = TextEditingController();
+    controller.addListener(() {
+      if (controller.text.endsWith('\n')) {
+        controller.text = controller.text.trim();
+        if (controller.text.isNotEmpty) {
+          _handleSendMessage(ChatMessage(
+            text: controller.text,
+            user: _currentUser,
+            createdAt: DateTime.now(),
+          ));
+          controller.clear();
+        }
+      }
+    });
+    return controller;
   }
 }

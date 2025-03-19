@@ -205,7 +205,7 @@ class ChatInput extends StatelessWidget {
       color: options.materialColor,
       elevation: options.materialElevation ?? 0.0,
       shape: options.materialShape,
-      shadowColor: Colors.black45,
+      shadowColor: Colors.transparent,
       child: Padding(
         padding: options.materialPadding != null
             ? options.materialPadding!

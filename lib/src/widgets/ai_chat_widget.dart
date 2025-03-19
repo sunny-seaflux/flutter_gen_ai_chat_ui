@@ -269,7 +269,7 @@ class _AiChatWidgetState extends State<AiChatWidget>
         listenable: widget.controller,
         builder: (final context, final child) => Material(
           color: Colors.transparent,
-          child: Container(
+          child: SizedBox(
             width: widget.maxWidth ?? double.infinity,
             height: double.infinity,
             // padding: widget.padding ?? const EdgeInsets.all(8),
@@ -570,7 +570,7 @@ class _AiChatWidgetState extends State<AiChatWidget>
                         ),
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Icon(
                   effectiveConfig.trailingIconData ??
                       Icons.arrow_forward_ios_rounded,

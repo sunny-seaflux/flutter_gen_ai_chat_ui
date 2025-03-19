@@ -168,6 +168,9 @@ Try asking questions or exploring the settings panel to see these features in ac
 
   /// Handle sending a message with support for streaming
   Future<void> _handleSendMessage(ChatMessage message) async {
+    // Add the user's message to the chat
+    _chatController.addMessage(message);
+
     // Get app state
     final appState = Provider.of<AppState>(context, listen: false);
 

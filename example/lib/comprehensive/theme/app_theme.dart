@@ -22,7 +22,7 @@ class AppTheme {
   static const Color darkSurfaceVariant = Color(0xFF2A2A2A);
 
   // Light theme extension for the chat UI
-  static final CustomThemeExtension lightThemeExtension = CustomThemeExtension(
+  static const CustomThemeExtension lightThemeExtension = CustomThemeExtension(
     chatBackground: lightBg,
     messageBubbleColor: lightSurfaceVariant,
     userBubbleColor: Color(0xFFE6E4FD),
@@ -37,7 +37,7 @@ class AppTheme {
   );
 
   // Dark theme extension for the chat UI
-  static final CustomThemeExtension darkThemeExtension = CustomThemeExtension(
+  static const CustomThemeExtension darkThemeExtension = CustomThemeExtension(
     chatBackground: darkBg,
     messageBubbleColor: darkSurfaceVariant,
     userBubbleColor: Color(0xFF36307D),
@@ -55,16 +55,14 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       primary: primaryColor,
       secondary: secondaryColor,
       surface: lightSurface,
-      background: lightBg,
       error: errorColor,
       onPrimary: Colors.white,
       onSecondary: Colors.black,
       onSurface: lightOnSurface,
-      onBackground: lightOnSurface,
       onError: Colors.white,
     ),
     scaffoldBackgroundColor: lightBg,
@@ -107,16 +105,14 @@ class AppTheme {
   static final ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    colorScheme: ColorScheme.dark(
+    colorScheme: const ColorScheme.dark(
       primary: primaryColor,
       secondary: secondaryColor,
       surface: darkSurface,
-      background: darkBg,
       error: errorColor,
       onPrimary: Colors.white,
       onSecondary: Colors.black,
       onSurface: darkOnSurface,
-      onBackground: darkOnSurface,
       onError: Colors.black,
     ),
     scaffoldBackgroundColor: darkBg,

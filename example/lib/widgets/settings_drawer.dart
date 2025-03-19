@@ -183,7 +183,7 @@ class SettingsDrawer extends StatelessWidget {
                               color: colorScheme.primary,
                               shape: BoxShape.circle,
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Icon(
                                 Icons.chat_rounded,
                                 color: Colors.white,

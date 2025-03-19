@@ -1,11 +1,50 @@
-# Excluded from pub package
-.cursor/
+# Flutter package publishing ignores
+# See https://dart.dev/tools/pub/publishing#what-files-are-published
+
+# Build artifacts and caches
+build/
+build/**
+**/build/**
+**/*.dill
+**/*.dill.track.dill
+.dart_tool/
+**/.dart_tool/**
 .flutter-plugins
 .flutter-plugins-dependencies
+*.log
+**/*.log
+
+# Example app (exclude most of it)
+example/android/
+example/ios/
+example/web/
+example/windows/
+example/linux/
+example/macos/
+example/build/
+example/.dart_tool/
+example/pubspec.lock
+example/.flutter-plugins
+example/.flutter-plugins-dependencies
+example/flutter_*.log
+example/.metadata
+example/CHANGELOG.md
+example/README.md
+example/analysis_options.yaml
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+.cursor/
+**/.cursor/
+
+# Development files
 files_list.md
 logger.txt
+context.md
 
-# Git files
+# Git related
 .git/
 .github/
 .gitignore
@@ -14,24 +53,28 @@ logger.txt
 .metadata
 .packages
 pubspec.lock
-.dart_tool/
 
 # Test and coverage files
 coverage/
 .test_coverage.dart
-
-# Misc
-*.log
-.DS_Store
-
-# Test files
 test/goldens/
 test/visual/failures/
+test/visual/test/
+test/feature_verification/
+**/*.g.dart
+**/*.freezed.dart
 
-# IDE files
-.idea/
-.vscode/
-*.iml
+# Screenshots
+screenshots/
 
-# Context files
-context.md 
+# System files
+.DS_Store
+**/.DS_Store
+
+# Documentation (keep only what's needed)
+doc/
+!doc/CHANGELOG.md
+!doc/USAGE.md
+
+# Debug and analysis files
+devtools_options.yaml 

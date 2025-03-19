@@ -121,7 +121,7 @@ class InputOptions {
     this.inputContainerConstraints,
     this.inputContainerWidth,
     this.useOuterContainer = true,
-    this.useOuterMaterial = true,
+    this.useOuterMaterial = false,
     this.materialElevation = 0,
     this.materialColor,
     this.materialShape,
@@ -212,7 +212,7 @@ class InputOptions {
     TextEditingController? textController,
     bool sendOnEnter = true,
   }) {
-    final List<Color> effectiveColors = colors ??
+    final effectiveColors = colors ??
         [
           Colors.white.withValues(alpha: 0.3),
           Colors.white.withValues(alpha: 0.2),
@@ -359,7 +359,7 @@ class InputOptions {
       materialPadding: materialPadding ?? this.materialPadding,
       useScaffoldBackground:
           useScaffoldBackground ?? this.useScaffoldBackground,
-      inputTextDirection: textDirection ?? this.inputTextDirection,
+      inputTextDirection: textDirection ?? inputTextDirection,
       positionedLeft: positionedLeft ?? this.positionedLeft,
       positionedRight: positionedRight ?? this.positionedRight,
       positionedBottom: positionedBottom ?? this.positionedBottom,
@@ -417,9 +417,6 @@ class InputOptions {
         color: sendButtonColor,
       ),
       padding: sendButtonPadding,
-      constraints:
-          const BoxConstraints(), // Remove default constraints for better sizing
-      visualDensity: VisualDensity.compact, // More compact button
       onPressed: onSend,
     );
   }

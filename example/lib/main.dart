@@ -3,11 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'examples/home_screen.dart';
-// We'll create these screens next
 import 'examples/01_basic/basic_chat_screen.dart';
 import 'examples/02_intermediate/intermediate_chat_screen.dart';
 import 'examples/03_advanced/advanced_chat_screen.dart';
-import 'examples/04_specialized/specialized_home.dart';
 
 // For state management
 import 'models/app_state.dart';
@@ -52,7 +50,6 @@ class ExampleApp extends StatelessWidget {
               '/basic': (context) => const BasicChatScreen(),
               '/intermediate': (context) => const IntermediateChatScreen(),
               '/advanced': (context) => const AdvancedChatScreen(),
-              '/specialized': (context) => const SpecializedHomeScreen(),
             },
           );
         },

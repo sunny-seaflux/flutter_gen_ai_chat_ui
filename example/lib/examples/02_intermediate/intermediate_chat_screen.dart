@@ -30,15 +30,14 @@ class _IntermediateChatScreenState extends State<IntermediateChatScreen> {
   );
 
   // Streaming state management
-  String _streamingMessageId = '';
   bool _isGenerating = false;
 
   // Example questions
   final _exampleQuestions = [
-    ExampleQuestion(question: "What can you help me with?"),
-    ExampleQuestion(question: "Show me a code example"),
-    ExampleQuestion(question: "How does streaming text work?"),
-    ExampleQuestion(question: "Tell me about markdown support"),
+    const ExampleQuestion(question: "What can you help me with?"),
+    const ExampleQuestion(question: "Show me a code example"),
+    const ExampleQuestion(question: "How does streaming text work?"),
+    const ExampleQuestion(question: "Tell me about markdown support"),
   ];
 
   @override
@@ -70,6 +69,9 @@ class _IntermediateChatScreenState extends State<IntermediateChatScreen> {
 
   /// Handle sending a message and generating a streaming response
   Future<void> _handleSendMessage(ChatMessage message) async {
+    // Add the user's message to the chat
+    _chatController.addMessage(message);
+
     // Get application state
     final appState = Provider.of<AppState>(context, listen: false);
 
@@ -93,7 +95,6 @@ class _IntermediateChatScreenState extends State<IntermediateChatScreen> {
 
       // Set streaming state
       setState(() {
-        _streamingMessageId = messageId;
         _isGenerating = true;
       });
 
@@ -113,7 +114,6 @@ class _IntermediateChatScreenState extends State<IntermediateChatScreen> {
       } finally {
         // Reset streaming state when done or on error
         setState(() {
-          _streamingMessageId = '';
           _isGenerating = false;
         });
       }
@@ -228,14 +228,14 @@ class _IntermediateChatScreenState extends State<IntermediateChatScreen> {
             gradient: LinearGradient(
               colors: [
                 colorScheme.primaryContainer,
-                colorScheme.primary.withOpacity(0.1),
+                colorScheme.primary.withValues(alpha: 0.1 * 255),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: colorScheme.primary.withOpacity(0.3),
+              color: colorScheme.primary.withValues(alpha: 0.3 * 255),
               width: 1.5,
             ),
           ),
@@ -248,7 +248,10 @@ class _IntermediateChatScreenState extends State<IntermediateChatScreen> {
         // Input customization
         inputOptions: InputOptions(
           unfocusOnTapOutside: false,
+          margin: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
           sendOnEnter: true,
+          sendButtonPadding: const EdgeInsets.only(right: 8),
+          sendButtonIconSize: 24,
           decoration: InputDecoration(
             hintText: 'Ask anything...',
             border: OutlineInputBorder(
@@ -256,19 +259,10 @@ class _IntermediateChatScreenState extends State<IntermediateChatScreen> {
               borderSide: BorderSide.none,
             ),
             filled: true,
-            fillColor: colorScheme.surfaceVariant.withOpacity(0.8),
-            prefixIcon: const Icon(Icons.chat_bubble_outline),
-            suffixIcon: const Icon(Icons.send_rounded),
-          ),
-          containerDecoration: BoxDecoration(
-            color: colorScheme.surface,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 8,
-                offset: const Offset(0, -2),
-              ),
-            ],
+            fillColor: colorScheme.surfaceContainerHighest
+                .withValues(alpha: 0.8 * 255),
+
+            // suffixIcon: const Icon(Icons.send_rounded),
           ),
         ),
 
@@ -279,7 +273,7 @@ class _IntermediateChatScreenState extends State<IntermediateChatScreen> {
           timeFormat: (dateTime) => '${dateTime.hour}:${dateTime.minute}',
           bubbleStyle: BubbleStyle(
             userBubbleColor: colorScheme.primaryContainer,
-            aiBubbleColor: colorScheme.surfaceVariant,
+            aiBubbleColor: colorScheme.surfaceContainerHighest,
           ),
         ),
 

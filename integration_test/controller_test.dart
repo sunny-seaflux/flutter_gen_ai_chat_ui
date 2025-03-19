@@ -97,7 +97,7 @@ void main() {
           findsOneWidget);
 
       // Act: Remove one message by creating a new list without it
-      var messages = controller.messages.toList();
+      final messages = controller.messages.toList();
       messages.removeWhere((msg) => msg.text == 'This message will be removed');
       controller.clearMessages();
       controller.addMessages(messages);
@@ -210,7 +210,7 @@ void main() {
         (WidgetTester tester) async {
       // Arrange: Create a controller and a counter for change notifications
       final notifyController = ChatMessagesController();
-      int changeCount = 0;
+      var changeCount = 0;
 
       // Set up a listener
       notifyController.addListener(() {

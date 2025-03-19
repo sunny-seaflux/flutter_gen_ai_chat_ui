@@ -19,7 +19,7 @@ void main() {
     testWidgets('Should render streaming text with animation',
         (WidgetTester tester) async {
       // Arrange: Create config with streaming enabled
-      final config = AiChatConfig(
+      const config = AiChatConfig(
         enableAnimation: true,
         enableMarkdownStreaming: true,
         streamingDuration: const Duration(milliseconds: 50), // Fast for testing
@@ -97,7 +97,7 @@ void main() {
         (WidgetTester tester) async {
       // Arrange: Create a controller for manual streaming updates
       final streamingController = ChatMessagesController();
-      final streamingConfig = AiChatConfig(
+      const streamingConfig = AiChatConfig(
         enableAnimation: true,
         enableMarkdownStreaming: true,
         streamingDuration: const Duration(milliseconds: 30),
@@ -148,7 +148,7 @@ void main() {
     testWidgets('Should disable streaming animation when configured',
         (WidgetTester tester) async {
       // Arrange: Create config with streaming disabled
-      final config = AiChatConfig(
+      const config = AiChatConfig(
         enableAnimation: true,
         enableMarkdownStreaming: false, // Disable streaming
       );

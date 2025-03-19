@@ -63,12 +63,10 @@ class AppTheme {
       secondary: _secondaryColor,
       tertiary: _accentColor,
       surface: _lightSurfaceColor,
-      background: _lightBackgroundColor,
       error: _dangerColor,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onSurface: _lightOnSurfaceColor,
-      onBackground: _lightOnSurfaceColor,
       onError: Colors.white,
     ),
     appBarTheme: AppBarTheme(
@@ -118,13 +116,13 @@ class AppTheme {
       backgroundColor: _lightSurfaceColor,
       elevation: 3,
       shadowColor: Colors.black.withOpacity(0.05),
-      labelTextStyle: MaterialStateProperty.all(
+      labelTextStyle: WidgetStateProperty.all(
         const TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w500,
         ),
       ),
-      iconTheme: MaterialStateProperty.all(
+      iconTheme: WidgetStateProperty.all(
         const IconThemeData(size: 24),
       ),
     ),
@@ -168,12 +166,10 @@ class AppTheme {
       secondary: _secondaryColor,
       tertiary: _accentColor,
       surface: _darkSurfaceColor,
-      background: _darkBackgroundColor,
       error: _dangerColor,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onSurface: _darkOnSurfaceColor,
-      onBackground: _darkOnSurfaceColor,
       onError: Colors.white,
     ),
     appBarTheme: AppBarTheme(
@@ -224,13 +220,13 @@ class AppTheme {
       backgroundColor: _darkSurfaceColor,
       elevation: 3,
       shadowColor: Colors.black.withOpacity(0.2),
-      labelTextStyle: MaterialStateProperty.all(
+      labelTextStyle: WidgetStateProperty.all(
         const TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w500,
         ),
       ),
-      iconTheme: MaterialStateProperty.all(
+      iconTheme: WidgetStateProperty.all(
         const IconThemeData(size: 24),
       ),
     ),

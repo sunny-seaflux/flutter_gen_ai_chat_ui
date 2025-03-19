@@ -213,12 +213,10 @@ class _LoadingWidgetState extends State<LoadingWidget> {
     }
 
     // Determine background
-    Color? backgroundColor = widget.backgroundColor;
+    var backgroundColor = widget.backgroundColor;
 
     // By default, use transparent backgrounds
-    if (backgroundColor == null) {
-      backgroundColor = Colors.transparent;
-    }
+    backgroundColor ??= Colors.transparent;
 
     // Build decoration
     return BoxDecoration(
@@ -241,7 +239,7 @@ class _LoadingWidgetState extends State<LoadingWidget> {
         (isDark ? Theme.of(context).colorScheme.surface : Colors.white);
 
     // Create constraints for sizing
-    final BoxConstraints constraints = BoxConstraints(
+    final constraints = BoxConstraints(
       minWidth: widget.minWidth ?? 0,
       maxWidth: widget.maxWidth ?? double.infinity,
       minHeight: widget.minHeight ?? 0,
@@ -249,7 +247,7 @@ class _LoadingWidgetState extends State<LoadingWidget> {
     );
 
     // Check if we need to apply container styling (if any custom properties are set)
-    final bool useContainerStyling = widget.backgroundColor != null ||
+    final useContainerStyling = widget.backgroundColor != null ||
         widget.borderRadius != null ||
         widget.border != null ||
         widget.boxShadow != null ||

@@ -18,7 +18,7 @@ void main() {
     testWidgets('Should show loading indicator when isLoading is true',
         (WidgetTester tester) async {
       // Arrange: Create config with loading enabled
-      final loadingConfig = LoadingConfig(
+      const loadingConfig = LoadingConfig(
         isLoading: true,
       );
 
@@ -75,7 +75,7 @@ void main() {
 
       // Find the Container with the amber color
       final containers = find.byType(Container).evaluate().toList();
-      bool foundCustomContainer = false;
+      var foundCustomContainer = false;
 
       for (final element in containers) {
         final container = element.widget as Container;
@@ -137,7 +137,7 @@ void main() {
         const ChatUser(id: 'ai-1', name: 'AI Assistant'),
       ];
 
-      final loadingConfig = LoadingConfig(
+      const loadingConfig = LoadingConfig(
         typingIndicatorColor: Colors.purple,
       );
 

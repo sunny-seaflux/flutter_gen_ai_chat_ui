@@ -18,7 +18,7 @@ void main() {
     testWidgets('Should apply custom input decoration',
         (WidgetTester tester) async {
       // Arrange: Create config with custom input decoration
-      final inputOptions = InputOptions(
+      const inputOptions = InputOptions(
         decoration: const InputDecoration(
           hintText: 'Custom hint text',
           border: OutlineInputBorder(),
@@ -52,7 +52,7 @@ void main() {
 
     testWidgets('Should apply custom text style', (WidgetTester tester) async {
       // Arrange: Create config with custom text style
-      final inputOptions = InputOptions(
+      const inputOptions = InputOptions(
         textStyle: const TextStyle(
           color: Colors.red,
           fontSize: 18,
@@ -120,7 +120,7 @@ void main() {
     testWidgets('Should respect max lines setting',
         (WidgetTester tester) async {
       // Arrange: Create config with custom max lines
-      final inputOptions = InputOptions(
+      const inputOptions = InputOptions(
         maxLines: 3,
       );
 
@@ -176,7 +176,7 @@ void main() {
       // We might need to adjust based on the actual implementation
       final containers = find.byType(Container).evaluate().toList();
 
-      bool foundMatchingContainer = false;
+      var foundMatchingContainer = false;
       for (final containerElement in containers) {
         final container = containerElement.widget as Container;
         if (container.decoration is BoxDecoration) {

@@ -26,7 +26,7 @@ class ExamplesHomeScreen extends StatelessWidget {
                   crossAxisCount: 2,
                   mainAxisSpacing: 16.0,
                   crossAxisSpacing: 16.0,
-                  childAspectRatio: 0.8,
+                  childAspectRatio: 0.75,
                 ),
                 delegate: SliverChildListDelegate([
                   _buildExampleCard(
@@ -53,21 +53,7 @@ class ExamplesHomeScreen extends StatelessWidget {
                     color: Colors.purple,
                     routeName: '/advanced',
                   ),
-                  _buildExampleCard(
-                    context,
-                    title: 'Specialized',
-                    description: 'Industry-specific implementations',
-                    icon: Icons.diversity_3,
-                    color: Colors.orange,
-                    routeName: '/specialized',
-                  ),
                 ]),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: _buildFeaturesSection(context),
               ),
             ),
           ],
@@ -145,45 +131,51 @@ class ExamplesHomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Expanded(
+                      child: Text(
+                        description,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color:
+                                  Theme.of(context).textTheme.bodySmall?.color,
+                            ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Explore',
+                          style: TextStyle(
+                            color: color,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    description,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).textTheme.bodySmall?.color,
-                        ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Explore',
-                        style: TextStyle(
+                        Icon(
+                          Icons.arrow_forward,
+                          size: 16,
                           color: color,
-                          fontWeight: FontWeight.bold,
                         ),
-                      ),
-                      Icon(
-                        Icons.arrow_forward,
-                        size: 16,
-                        color: color,
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

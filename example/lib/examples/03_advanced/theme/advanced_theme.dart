@@ -34,7 +34,6 @@ class AdvancedTheme extends InheritedWidget {
   /// Light theme
   factory AdvancedTheme.light({required Widget child}) {
     return AdvancedTheme(
-      child: child,
       gradientStart: const Color(0xFFEBF4FF),
       gradientEnd: const Color(0xFFF5F8FF),
       userBubbleColor: const Color(0xFF2979FF),
@@ -46,13 +45,13 @@ class AdvancedTheme extends InheritedWidget {
       codeBlockBackground: const Color(0xFFF6F8FA),
       shimmerBaseColor: Colors.grey[300]!,
       shimmerHighlightColor: Colors.grey[100]!,
+      child: child,
     );
   }
 
   /// Dark theme
   factory AdvancedTheme.dark({required Widget child}) {
     return AdvancedTheme(
-      child: child,
       gradientStart: const Color(0xFF121212),
       gradientEnd: const Color(0xFF1E1E1E),
       userBubbleColor: const Color(0xFF2979FF),
@@ -64,6 +63,7 @@ class AdvancedTheme extends InheritedWidget {
       codeBlockBackground: const Color(0xFF2D2D2D),
       shimmerBaseColor: Colors.grey[800]!,
       shimmerHighlightColor: Colors.grey[700]!,
+      child: child,
     );
   }
 

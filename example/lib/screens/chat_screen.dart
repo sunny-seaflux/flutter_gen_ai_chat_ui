@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen_ai_chat_ui/flutter_gen_ai_chat_ui.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 
@@ -110,7 +109,7 @@ class _ChatScreenState extends State<ChatScreen>
           String accumulatedText = "";
           await for (final wordsSoFar in stream) {
             // Sometimes stream events can be empty or null - skip those
-            if (wordsSoFar == null || wordsSoFar.isEmpty) continue;
+            if (wordsSoFar.isEmpty) continue;
 
             accumulatedText = wordsSoFar;
 
@@ -272,12 +271,12 @@ class _ChatScreenState extends State<ChatScreen>
               // AI-specific features
               enableMarkdownStreaming: true,
               streamingDuration: const Duration(milliseconds: 30),
-              exampleQuestions: [
+              exampleQuestions: const [
                 ExampleQuestion(
                   question: 'What can you help me with?',
                   config: ExampleQuestionConfig(
                     iconData: Icons.help_outline,
-                    containerPadding: const EdgeInsets.symmetric(
+                    containerPadding: EdgeInsets.symmetric(
                       horizontal: 16,
                       vertical: 12,
                     ),

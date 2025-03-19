@@ -18,7 +18,7 @@ void main() {
     testWidgets('Should apply custom input decoration',
         (WidgetTester tester) async {
       // Arrange: Create config with custom input decoration
-      final config = AiChatConfig(
+      const config = AiChatConfig(
         inputOptions: InputOptions(
           decoration: const InputDecoration(
             hintText: 'Type a custom message...',
@@ -49,7 +49,7 @@ void main() {
     testWidgets('Should apply custom text style to input field',
         (WidgetTester tester) async {
       // Arrange: Create config with custom text style
-      final config = AiChatConfig(
+      const config = AiChatConfig(
         inputOptions: InputOptions(
           textStyle: const TextStyle(
             color: Colors.blue,
@@ -107,7 +107,7 @@ void main() {
 
     testWidgets('Should respect maxLines setting', (WidgetTester tester) async {
       // Arrange: Create config with maxLines set
-      final config = AiChatConfig(
+      const config = AiChatConfig(
         inputOptions: const InputOptions(
           maxLines: 3,
         ),

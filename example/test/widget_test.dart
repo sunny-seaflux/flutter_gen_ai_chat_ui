@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 // Use direct import instead of package import
-import '../lib/main.dart';
+import 'package:flutter_gen_ai_chat_ui_example/main.dart';
 
 void main() {
   testWidgets('Smoke test - example app', (WidgetTester tester) async {

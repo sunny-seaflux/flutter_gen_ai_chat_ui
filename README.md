@@ -5,6 +5,8 @@
 
 A modern, customizable chat UI for AI applications built with Flutter. Features streaming responses, markdown support, and rich customization options.
 
+> **Development Status**: This package is under active development. You may encounter breaking changes with each update as we improve the API and add new features. Please check the CHANGELOG before updating to a new version.
+
 ## Table of Contents
 - [Features](#features)
 - [Installation](#installation)
@@ -70,6 +72,8 @@ Then run:
 ```bash
 flutter pub get
 ```
+
+> **⚠️ Important**: This package is under active development. We recommend pinning to a specific version in your pubspec.yaml to avoid unexpected breaking changes when you update. Always check the [CHANGELOG](https://github.com/hooshyar/flutter_gen_ai_chat_ui/blob/main/CHANGELOG.md) before upgrading.
 
 ## Basic Usage
 

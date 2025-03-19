@@ -144,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen>
               elevation: 0,
               backgroundColor: isDarkMode
                   ? colorScheme.surface.withOpacity(0.9)
-                  : colorScheme.background,
+                  : colorScheme.surface,
               destinations: [
                 NavigationDestination(
                   icon: const Icon(Icons.chat_bubble_outline_rounded),

@@ -22,8 +22,8 @@ class _ChatScreenState extends State<ChatScreen>
     with SingleTickerProviderStateMixin {
   final _chatController = ChatMessagesController();
   final _aiService = AiService();
-  final _currentUser = ChatUser(id: 'user123', firstName: 'You');
-  final _aiUser = ChatUser(id: 'ai123', firstName: 'Insight AI');
+  final _currentUser = const ChatUser(id: 'user123', firstName: 'You');
+  final _aiUser = const ChatUser(id: 'ai123', firstName: 'Insight AI');
   final _random = Random();
   bool _isLoading = false;
   late AnimationController _fadeController;
@@ -180,7 +180,7 @@ class _ChatScreenState extends State<ChatScreen>
         color: theme.colorScheme.primary,
       ),
       blockquoteDecoration: BoxDecoration(
-        color: theme.colorScheme.surfaceVariant,
+        color: theme.colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(4),
         border: Border(
           left: BorderSide(
@@ -210,8 +210,9 @@ class _ChatScreenState extends State<ChatScreen>
       showUserName: true,
       bubbleStyle: BubbleStyle(
         userBubbleColor: theme.colorScheme.primary.withOpacity(0.15),
-        aiBubbleColor:
-            isDark ? theme.colorScheme.surfaceVariant : theme.cardColor,
+        aiBubbleColor: isDark
+            ? theme.colorScheme.surfaceContainerHighest
+            : theme.cardColor,
         userNameColor: theme.colorScheme.primary,
         aiNameColor: theme.colorScheme.tertiary,
         userBubbleTopLeftRadius: appState.messageBorderRadius,
@@ -241,7 +242,9 @@ class _ChatScreenState extends State<ChatScreen>
           borderSide: BorderSide.none,
         ),
         filled: true,
-        fillColor: isDark ? theme.colorScheme.surfaceVariant : theme.cardColor,
+        fillColor: isDark
+            ? theme.colorScheme.surfaceContainerHighest
+            : theme.cardColor,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 14,
@@ -305,29 +308,29 @@ class _ChatScreenState extends State<ChatScreen>
 
     // Example questions
     final exampleQuestions = [
-      ExampleQuestion(
+      const ExampleQuestion(
         question: 'What can you help me with?',
         config: ExampleQuestionConfig(
           iconData: Icons.help_outline,
-          containerPadding: const EdgeInsets.symmetric(
+          containerPadding: EdgeInsets.symmetric(
             horizontal: 16,
             vertical: 12,
           ),
         ),
       ),
-      ExampleQuestion(
+      const ExampleQuestion(
         question: 'Show me a Flutter code example',
         config: ExampleQuestionConfig(
           iconData: Icons.code,
         ),
       ),
-      ExampleQuestion(
+      const ExampleQuestion(
         question: 'Tell me about yourself',
         config: ExampleQuestionConfig(
           iconData: Icons.info_outline,
         ),
       ),
-      ExampleQuestion(
+      const ExampleQuestion(
         question: 'What features does this chat UI have?',
         config: ExampleQuestionConfig(
           iconData: Icons.chat_bubble_outline,

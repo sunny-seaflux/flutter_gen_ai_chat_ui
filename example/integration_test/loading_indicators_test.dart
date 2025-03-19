@@ -18,7 +18,7 @@ void main() {
     testWidgets('Should show loading indicator when isLoading is true',
         (WidgetTester tester) async {
       // Arrange: Create config with loading set to true
-      final config = AiChatConfig(
+      const config = AiChatConfig(
         loadingConfig: const LoadingConfig(
           isLoading: true,
         ),
@@ -45,7 +45,7 @@ void main() {
           loadingIndicator: Container(
             width: 50,
             height: 50,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.amber,
               shape: BoxShape.circle,
             ),
@@ -88,7 +88,7 @@ void main() {
     testWidgets('Should show typing indicator when typing users are specified',
         (WidgetTester tester) async {
       // Arrange: Create config with typing users
-      final config = AiChatConfig(
+      const config = AiChatConfig(
         typingUsers: [const ChatUser(id: 'user-2', name: 'John')],
       );
 
@@ -112,7 +112,7 @@ void main() {
     testWidgets('Should respect typing indicator color',
         (WidgetTester tester) async {
       // Arrange: Create config with typing users and custom color
-      final config = AiChatConfig(
+      const config = AiChatConfig(
         typingUsers: [const ChatUser(id: 'user-2', name: 'John')],
         loadingConfig: const LoadingConfig(
           typingIndicatorColor: Colors.purple,
