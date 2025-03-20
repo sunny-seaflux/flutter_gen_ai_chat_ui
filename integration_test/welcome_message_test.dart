@@ -18,16 +18,11 @@ void main() {
 
     testWidgets('Should display welcome message when configured',
         (WidgetTester tester) async {
-      // Arrange: Create config with welcome message
-      final config = AiChatConfig(
-        welcomeMessageConfig: TestUtils.createWelcomeMessageConfig(),
-      );
-
-      // Act: Render the chat widget
+      // Act: Render the chat widget with welcome message
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: controller,
-          config: config,
+          welcomeMessageConfig: TestUtils.createWelcomeMessageConfig(),
         ),
       );
 
@@ -40,23 +35,19 @@ void main() {
 
     testWidgets('Should display example questions',
         (WidgetTester tester) async {
-      // Arrange: Create config with example questions
+      // Arrange: Create example questions
       final exampleQuestions = [
         const ExampleQuestion(question: 'What is your name?'),
         const ExampleQuestion(question: 'How can you help me?'),
         const ExampleQuestion(question: 'Tell me a joke'),
       ];
 
-      final config = AiChatConfig(
-        exampleQuestions: exampleQuestions,
-        welcomeMessageConfig: TestUtils.createWelcomeMessageConfig(),
-      );
-
       // Act: Render the chat widget
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: controller,
-          config: config,
+          exampleQuestions: exampleQuestions,
+          welcomeMessageConfig: TestUtils.createWelcomeMessageConfig(),
           onSendMessage: (message) {
             sentMessages.add(message);
           },
@@ -76,21 +67,17 @@ void main() {
 
     testWidgets('Should send message when example question is tapped',
         (WidgetTester tester) async {
-      // Arrange: Create config with example questions
+      // Arrange: Create example questions
       final exampleQuestions = [
         const ExampleQuestion(question: 'What is your name?'),
       ];
-
-      final config = AiChatConfig(
-        exampleQuestions: exampleQuestions,
-        welcomeMessageConfig: TestUtils.createWelcomeMessageConfig(),
-      );
 
       // Act: Render the chat widget
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: controller,
-          config: config,
+          exampleQuestions: exampleQuestions,
+          welcomeMessageConfig: TestUtils.createWelcomeMessageConfig(),
           onSendMessage: (message) {
             sentMessages.add(message);
             // Simulate AI response
@@ -121,20 +108,18 @@ void main() {
 
     testWidgets('Should hide welcome message after sending a message',
         (WidgetTester tester) async {
-      // Arrange: Create config with welcome message and example questions
-      final config = AiChatConfig(
-        welcomeMessageConfig: TestUtils.createWelcomeMessageConfig(),
-        exampleQuestions: [
-          const ExampleQuestion(question: 'Question 1'),
-          const ExampleQuestion(question: 'Question 2'),
-        ],
-      );
+      // Arrange: Create example questions
+      final exampleQuestions = [
+        const ExampleQuestion(question: 'Question 1'),
+        const ExampleQuestion(question: 'Question 2'),
+      ];
 
       // Act: Render the chat widget
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: controller,
-          config: config,
+          welcomeMessageConfig: TestUtils.createWelcomeMessageConfig(),
+          exampleQuestions: exampleQuestions,
           onSendMessage: (message) {
             sentMessages.add(message);
             // Add AI response
@@ -164,20 +149,18 @@ void main() {
     testWidgets(
         'Should maintain example questions when configured as persistent',
         (WidgetTester tester) async {
-      // Arrange: Create config with persistent example questions
-      final config = AiChatConfig(
-        welcomeMessageConfig: TestUtils.createWelcomeMessageConfig(),
-        exampleQuestions: [
-          const ExampleQuestion(question: 'Persistent question'),
-        ],
-        persistentExampleQuestions: true,
-      );
+      // Arrange: Create example questions
+      final exampleQuestions = [
+        const ExampleQuestion(question: 'Persistent question'),
+      ];
 
       // Act: Render the chat widget
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: controller,
-          config: config,
+          welcomeMessageConfig: TestUtils.createWelcomeMessageConfig(),
+          exampleQuestions: exampleQuestions,
+          persistentExampleQuestions: true,
           onSendMessage: (message) {
             sentMessages.add(message);
             controller.addMessage(

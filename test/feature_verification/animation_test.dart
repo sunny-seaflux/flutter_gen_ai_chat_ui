@@ -25,10 +25,8 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           home: Scaffold(
             body: AiChatWidget(
-              config: AiChatConfig(
-                aiName: 'Test AI',
-                enableAnimation: true,
-              ),
+              aiName: 'Test AI',
+              enableAnimation: true,
               controller: controller,
               currentUser: currentUser,
               aiUser: aiUser,
@@ -69,15 +67,12 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           home: Scaffold(
             body: AiChatWidget(
-              config: AiChatConfig(
-                aiName: 'Test AI',
-                enableAnimation: true,
-                typingUsers: [aiUser], // AI is typing
-              ),
+              aiName: 'Test AI',
               controller: controller,
               currentUser: currentUser,
               aiUser: aiUser,
               onSendMessage: (_) {},
+              typingUsers: [aiUser], // AI is typing
             ),
           ),
         ));
@@ -119,11 +114,9 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           home: Scaffold(
             body: AiChatWidget(
-              config: AiChatConfig(
-                aiName: 'Test AI',
-                enableAnimation: true,
-                scrollToBottomOptions: scrollToBottomOptions,
-              ),
+              aiName: 'Test AI',
+              enableAnimation: true,
+              scrollToBottomOptions: scrollToBottomOptions,
               controller: controller,
               currentUser: currentUser,
               aiUser: aiUser,
@@ -157,11 +150,9 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           home: Scaffold(
             body: AiChatWidget(
-              config: AiChatConfig(
-                aiName: 'Test AI',
-                enableAnimation: true,
-                quickReplyOptions: quickReplyOptions,
-              ),
+              aiName: 'Test AI',
+              enableAnimation: true,
+              quickReplyOptions: quickReplyOptions,
               controller: controller,
               currentUser: currentUser,
               aiUser: aiUser,
@@ -189,10 +180,8 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           home: Scaffold(
             body: AiChatWidget(
-              config: AiChatConfig(
-                aiName: 'Test AI',
-                enableAnimation: false, // Animations disabled
-              ),
+              aiName: 'Test AI',
+              enableAnimation: false, // Animations disabled
               controller: controller,
               currentUser: currentUser,
               aiUser: aiUser,
@@ -238,12 +227,10 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           home: Scaffold(
             body: AiChatWidget(
-              config: AiChatConfig(
-                aiName: 'Test AI',
-                enableAnimation: true,
-                messageOptions: MessageOptions(
-                  bubbleStyle: bubbleStyle,
-                ),
+              aiName: 'Test AI',
+              enableAnimation: true,
+              messageOptions: MessageOptions(
+                bubbleStyle: bubbleStyle,
               ),
               controller: controller,
               currentUser: currentUser,
@@ -296,12 +283,10 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           home: Scaffold(
             body: AiChatWidget(
-              config: AiChatConfig(
-                aiName: 'Test AI',
-                enableAnimation: true,
-                welcomeMessageConfig: welcomeConfig,
-                exampleQuestions: exampleQuestions,
-              ),
+              aiName: 'Test AI',
+              enableAnimation: true,
+              welcomeMessageConfig: welcomeConfig,
+              exampleQuestions: exampleQuestions,
               controller: controller,
               currentUser: currentUser,
               aiUser: aiUser,

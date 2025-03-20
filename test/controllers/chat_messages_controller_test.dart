@@ -19,7 +19,7 @@ void main() {
   group('ChatMessagesController Message Management', () {
     test('initializes with empty message list', () {
       expect(controller.messages, isEmpty);
-      expect(controller.showWelcomeMessage, isTrue);
+      expect(controller.showWelcomeMessage, isFalse);
     });
 
     test('adds message correctly', () {
@@ -159,6 +159,8 @@ void main() {
 
   group('ChatMessagesController Welcome Message', () {
     test('hides welcome message correctly', () {
+      // Set welcome message to true first to test hiding it
+      controller.showWelcomeMessage = true;
       expect(controller.showWelcomeMessage, isTrue);
 
       controller.hideWelcomeMessage();

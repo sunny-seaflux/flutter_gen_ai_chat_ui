@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen_ai_chat_ui/flutter_gen_ai_chat_ui.dart';
 import 'package:network_image_mock/network_image_mock.dart';
+import 'test_helpers.dart';
 
 void main() {
   group('Accessibility Features', () {
@@ -37,7 +38,7 @@ void main() {
               data: const MediaQueryData(textScaleFactor: 1.5),
               child: Scaffold(
                 body: AiChatWidget(
-                  config: AiChatConfig(aiName: 'Test AI'),
+                  aiName: 'Test AI',
                   controller: controller,
                   currentUser: currentUser,
                   aiUser: aiUser,
@@ -49,6 +50,8 @@ void main() {
         );
 
         await tester.pump();
+        // Make sure all timers are pumped
+        await pumpUntilNoTimers(tester);
 
         // Assert - check that scaling is applied
         // (hard to verify exact scaling, but we check it renders without errors)
@@ -67,7 +70,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           home: Scaffold(
             body: AiChatWidget(
-              config: AiChatConfig(aiName: 'Test AI'),
+              aiName: 'Test AI',
               controller: controller,
               currentUser: currentUser,
               aiUser: aiUser,
@@ -113,7 +116,7 @@ void main() {
               textDirection: TextDirection.rtl,
               child: Scaffold(
                 body: AiChatWidget(
-                  config: AiChatConfig(aiName: 'Test AI'),
+                  aiName: 'Test AI',
                   controller: controller,
                   currentUser: currentUser,
                   aiUser: aiUser,
@@ -148,14 +151,12 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           home: Scaffold(
             body: AiChatWidget(
-              config: AiChatConfig(
-                aiName: 'Test AI',
-                enableAnimation: false, // Disable animations
-              ),
+              aiName: 'Test AI',
               controller: controller,
               currentUser: currentUser,
               aiUser: aiUser,
               onSendMessage: (_) {},
+              enableAnimation: false, // Disable animations
             ),
           ),
         ));
@@ -185,13 +186,24 @@ void main() {
         controller.addMessage(message);
 
         // Create a high-contrast dark theme
-        final highContrastDarkTheme = ThemeData.dark().copyWith(
-          textTheme: ThemeData.dark().textTheme.copyWith(
-                bodyMedium: const TextStyle(
-                  color: Colors.white, // Higher contrast text
-                  fontSize: 16,
-                ),
-              ),
+        final highContrastDarkTheme =
+            ThemeData.dark(useMaterial3: true).copyWith(
+          colorScheme: const ColorScheme.dark(
+            primary: Colors.yellow, // High contrast primary
+            onPrimary: Colors.black,
+            secondary: Colors.yellow,
+            onSecondary: Colors.black,
+            surface: Color(0xFF121212), // Very dark surface
+            onSurface: Colors.white, // High contrast text
+            error: Colors.red,
+            onError: Colors.white,
+          ),
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(
+              color: Colors.white, // Higher contrast text
+              fontSize: 16,
+            ),
+          ),
         );
 
         // Act - with high contrast dark theme
@@ -199,7 +211,7 @@ void main() {
           theme: highContrastDarkTheme,
           home: Scaffold(
             body: AiChatWidget(
-              config: AiChatConfig(aiName: 'Test AI'),
+              aiName: 'Test AI',
               controller: controller,
               currentUser: currentUser,
               aiUser: aiUser,

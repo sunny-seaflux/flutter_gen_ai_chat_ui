@@ -18,18 +18,14 @@ void main() {
 
     testWidgets('Should render streaming text with animation',
         (WidgetTester tester) async {
-      // Arrange: Create config with streaming enabled
-      const config = AiChatConfig(
-        enableAnimation: true,
-        enableMarkdownStreaming: true,
-        streamingDuration: const Duration(milliseconds: 50), // Fast for testing
-      );
-
-      // Act: Render the chat widget
+      // Act: Render the chat widget with streaming enabled
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: controller,
-          config: config,
+          enableAnimation: true,
+          enableMarkdownStreaming: true,
+          streamingDuration:
+              const Duration(milliseconds: 50), // Fast for testing
         ),
       );
 
@@ -57,19 +53,17 @@ void main() {
     });
 
     testWidgets('Should render markdown content', (WidgetTester tester) async {
-      // Arrange: Create config with markdown styling
-      final config = AiChatConfig(
-        markdownStyleSheet: MarkdownStyleSheet(
-          h1: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          code: const TextStyle(backgroundColor: Colors.grey),
-        ),
+      // Arrange: Create markdown style sheet
+      final markdownStyleSheet = MarkdownStyleSheet(
+        h1: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        code: const TextStyle(backgroundColor: Colors.grey),
       );
 
       // Act: Render the chat widget
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: controller,
-          config: config,
+          markdownStyleSheet: markdownStyleSheet,
         ),
       );
 
@@ -97,17 +91,14 @@ void main() {
         (WidgetTester tester) async {
       // Arrange: Create a controller for manual streaming updates
       final streamingController = ChatMessagesController();
-      const streamingConfig = AiChatConfig(
-        enableAnimation: true,
-        enableMarkdownStreaming: true,
-        streamingDuration: const Duration(milliseconds: 30),
-      );
 
       // Act: Render the chat widget
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: streamingController,
-          config: streamingConfig,
+          enableAnimation: true,
+          enableMarkdownStreaming: true,
+          streamingDuration: const Duration(milliseconds: 30),
         ),
       );
 
@@ -147,17 +138,12 @@ void main() {
 
     testWidgets('Should disable streaming animation when configured',
         (WidgetTester tester) async {
-      // Arrange: Create config with streaming disabled
-      const config = AiChatConfig(
-        enableAnimation: true,
-        enableMarkdownStreaming: false, // Disable streaming
-      );
-
-      // Act: Render the chat widget
+      // Act: Render the chat widget with streaming disabled
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: controller,
-          config: config,
+          enableAnimation: true,
+          enableMarkdownStreaming: false, // Disable streaming
         ),
       );
 

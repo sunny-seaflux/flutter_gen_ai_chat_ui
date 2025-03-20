@@ -2,26 +2,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen_ai_chat_ui/flutter_gen_ai_chat_ui.dart';
 
 void main() {
-  group('Pagination Controller Integration Tests', () {
-    late ChatUser currentUser;
-    late ChatUser aiUser;
-    late List<ChatMessage> testMessages;
-
-    setUp(() {
-      currentUser = const ChatUser(id: 'user-1', name: 'Test User');
-      aiUser = const ChatUser(id: 'ai-1', name: 'AI Assistant');
-
-      // Create test messages with sequential timestamps (1 to 50)
-      testMessages = List.generate(50, (index) {
-        final isUser = index % 2 == 0;
-        return ChatMessage(
-          text: 'Message ${index + 1}',
-          user: isUser ? currentUser : aiUser,
-          createdAt:
-              DateTime.now().subtract(Duration(minutes: (50 - index) * 5)),
-          customProperties: {'id': 'msg-${index + 1}'},
-        );
-      });
+  group('Pagination Controller Tests', () {
+    // Create a list of test messages for pagination tests
+    final testMessages = List.generate(50, (index) {
+      return ChatMessage(
+        text: 'Message ${index + 1}',
+        user: ChatUser(id: 'user1', firstName: 'Test User'),
+        createdAt: DateTime.now().subtract(Duration(minutes: (50 - index) * 5)),
+        customProperties: {'id': 'msg-${index + 1}'},
+      );
     });
 
     test('Controller loads more messages correctly in reverse mode', () async {
@@ -29,7 +18,6 @@ void main() {
       final controller = ChatMessagesController(
         paginationConfig: const PaginationConfig(
           enabled: true,
-          messagesPerPage: 10,
           loadingDelay: Duration(milliseconds: 100),
           reverseOrder: true,
         ),
@@ -60,7 +48,6 @@ void main() {
       final controller = ChatMessagesController(
         paginationConfig: const PaginationConfig(
           enabled: true,
-          messagesPerPage: 10,
           loadingDelay: Duration(milliseconds: 100),
           reverseOrder: false,
         ),
@@ -91,7 +78,6 @@ void main() {
       final controller = ChatMessagesController(
         paginationConfig: const PaginationConfig(
           enabled: true,
-          messagesPerPage: 10,
           loadingDelay: Duration(milliseconds: 100),
           reverseOrder: true,
         ),

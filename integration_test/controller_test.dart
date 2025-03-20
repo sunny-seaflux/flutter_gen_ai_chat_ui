@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_gen_ai_chat_ui/flutter_gen_ai_chat_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -154,10 +153,8 @@ void main() {
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: controller,
-          config: const AiChatConfig(
-            enableMarkdownStreaming: true,
-            streamingDuration: Duration(milliseconds: 30),
-          ),
+          enableMarkdownStreaming: true,
+          streamingDuration: const Duration(milliseconds: 30),
         ),
       );
 

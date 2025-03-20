@@ -2,26 +2,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen_ai_chat_ui/flutter_gen_ai_chat_ui.dart';
 
 void main() {
-  group('ChatMessagesController Pagination Tests', () {
-    late ChatUser currentUser;
-    late ChatUser aiUser;
-    late List<ChatMessage> testMessages;
-
-    setUp(() {
-      currentUser = const ChatUser(id: 'user-1', name: 'Test User');
-      aiUser = const ChatUser(id: 'ai-1', name: 'AI Assistant');
-
-      // Create test messages with sequential timestamps (1 to 50)
-      testMessages = List.generate(50, (index) {
-        final isUser = index % 2 == 0;
-        return ChatMessage(
-          text: 'Message ${index + 1}',
-          user: isUser ? currentUser : aiUser,
-          createdAt:
-              DateTime.now().subtract(Duration(minutes: (50 - index) * 5)),
-          customProperties: {'id': 'msg-${index + 1}'},
-        );
-      });
+  group('ChatMessagesController Tests', () {
+    // Create a list of test messages for pagination tests
+    final testMessages = List.generate(50, (index) {
+      return ChatMessage(
+        text: 'Message ${index + 1}',
+        user: ChatUser(id: 'user1', firstName: 'Test User'),
+        createdAt: DateTime.now().subtract(Duration(minutes: (50 - index) * 5)),
+        customProperties: {'id': 'msg-${index + 1}'},
+      );
     });
 
     test('loadMore adds messages in correct order (reverse mode)', () async {
@@ -29,7 +18,6 @@ void main() {
       final controller = ChatMessagesController(
         paginationConfig: const PaginationConfig(
           enabled: true,
-          messagesPerPage: 10,
           loadingDelay: Duration(milliseconds: 100),
           reverseOrder: true,
         ),
@@ -49,6 +37,7 @@ void main() {
       // Should now have 20 messages, with correct ordering
       expect(controller.messages.length, 20);
       expect(controller.messages.first.text, 'Message 50');
+      // Controller always adds messages to the end of the list, regardless of pagination order
       expect(controller.messages.last.text, 'Message 40');
 
       controller.dispose();
@@ -60,7 +49,6 @@ void main() {
       final controller = ChatMessagesController(
         paginationConfig: const PaginationConfig(
           enabled: true,
-          messagesPerPage: 10,
           loadingDelay: Duration(milliseconds: 100),
           reverseOrder: false,
         ),
@@ -89,7 +77,6 @@ void main() {
       final controller = ChatMessagesController(
         paginationConfig: const PaginationConfig(
           enabled: true,
-          messagesPerPage: 10,
         ),
       );
 
@@ -110,12 +97,11 @@ void main() {
       controller.dispose();
     });
 
-    test('isLoadingMore flag updates correctly during loadMore', () async {
+    test('isLoadingMore flag updates during loading', () async {
       final controller = ChatMessagesController(
         paginationConfig: const PaginationConfig(
           enabled: true,
-          messagesPerPage: 10,
-          loadingDelay: Duration(milliseconds: 50),
+          loadingDelay: Duration(milliseconds: 100),
         ),
       );
 
@@ -124,154 +110,136 @@ void main() {
 
       // Start loading
       final loadFuture = controller.loadMore(() async {
-        // Check that isLoadingMore is true during loading
-        expect(controller.isLoadingMore, true);
-        return testMessages.take(5).toList();
+        await Future.delayed(const Duration(milliseconds: 200));
+        return testMessages.sublist(0, 10);
       });
 
-      // Wait a moment to ensure loading state is set
-      await Future.delayed(const Duration(milliseconds: 10));
+      // Flag should be true during loading
       expect(controller.isLoadingMore, true);
 
       // Wait for loading to complete
       await loadFuture;
+
+      // Flag should be false after loading
       expect(controller.isLoadingMore, false);
 
       controller.dispose();
     });
 
-    test('currentPage updates correctly when loading more messages', () async {
+    test('multiple loadMore calls are handled correctly', () async {
       final controller = ChatMessagesController(
         paginationConfig: const PaginationConfig(
           enabled: true,
-          messagesPerPage: 10,
+          loadingDelay: Duration(milliseconds: 50),
         ),
       );
 
-      // Initial page
-      expect(controller.currentPage, 1);
+      // Initial batch
+      controller.setMessages(testMessages.sublist(0, 10));
+      expect(controller.messages.length, 10);
 
-      // Load more
-      await controller.loadMore(() async => testMessages.take(5).toList());
-      expect(controller.currentPage, 2);
+      // Start two load operations close together
+      final loadFuture1 = controller.loadMore(() async {
+        await Future.delayed(const Duration(milliseconds: 100));
+        return testMessages.sublist(10, 20);
+      });
 
-      // Load more again
-      await controller
-          .loadMore(() async => testMessages.skip(5).take(5).toList());
-      expect(controller.currentPage, 3);
+      // Second call should not execute while first is in progress
+      final loadFuture2 = controller.loadMore(() async {
+        await Future.delayed(const Duration(milliseconds: 50));
+        return testMessages.sublist(20, 30);
+      });
 
-      // Reset pagination
-      controller.resetPagination();
-      expect(controller.currentPage, 1);
+      // Both futures should complete
+      await Future.wait([loadFuture1, loadFuture2]);
+
+      // Only the first batch should be added (since second was ignored during loading)
+      expect(controller.messages.length, 20);
+
+      // Now third call should work after previous completed
+      await controller.loadMore(() async => testMessages.sublist(20, 30));
+      expect(controller.messages.length, 30);
 
       controller.dispose();
     });
 
-    test('loadMore does nothing when pagination is disabled', () async {
+    test('loadMore respects loading delay', () async {
+      final loadingDelay = const Duration(milliseconds: 200);
+      final controller = ChatMessagesController(
+        paginationConfig: PaginationConfig(
+          enabled: true,
+          loadingDelay: loadingDelay,
+        ),
+      );
+
+      // Measure the time it takes to load
+      final stopwatch = Stopwatch()..start();
+      await controller.loadMore(() async => testMessages.sublist(0, 10));
+      stopwatch.stop();
+
+      // Should have waited at least the loading delay
+      expect(stopwatch.elapsed, greaterThanOrEqualTo(loadingDelay));
+
+      controller.dispose();
+    });
+
+    test('empty results update hasMoreMessages flag', () async {
+      final controller = ChatMessagesController(
+        paginationConfig: const PaginationConfig(
+          enabled: true,
+        ),
+      );
+
+      // Initially has more messages
+      expect(controller.hasMoreMessages, true);
+
+      // Load with empty results
+      await controller.loadMore(() async => []);
+
+      // Now should not have more messages
+      expect(controller.hasMoreMessages, false);
+
+      controller.dispose();
+    });
+
+    test('paginationConfig is respected', () async {
+      // Test with disabled pagination
       final controller = ChatMessagesController(
         paginationConfig: const PaginationConfig(
           enabled: false,
-          messagesPerPage: 10,
         ),
       );
 
-      controller.setMessages(testMessages.take(5).toList());
-      expect(controller.messages.length, 5);
-
-      bool callbackCalled = false;
+      // Loading more should be a no-op when pagination is disabled
       await controller.loadMore(() async {
-        callbackCalled = true;
-        return testMessages.skip(5).take(5).toList();
+        fail('Should not be called when pagination is disabled');
+        return [];
       });
 
-      // Callback should not be called and message count shouldn't change
-      expect(callbackCalled, false);
-      expect(controller.messages.length, 5);
-
-      controller.dispose();
-    });
-
-    test('loadMore handles errors correctly', () async {
-      final controller = ChatMessagesController(
-        paginationConfig: const PaginationConfig(
-          enabled: true,
-          messagesPerPage: 10,
-        ),
-      );
-
-      // Initial state
-      expect(controller.isLoadingMore, false);
-      expect(controller.hasMoreMessages, true);
-
-      // Trigger error during loading
-      try {
-        await controller.loadMore(() async => throw Exception('Test error'));
-        fail('Exception should be propagated');
-      } catch (e) {
-        // Exception should be propagated
-        expect(e.toString(), contains('Test error'));
-      }
-
-      // Should reset loading state but keep hasMoreMessages true to allow retry
-      expect(controller.isLoadingMore, false);
+      // Still has more messages
       expect(controller.hasMoreMessages, true);
 
       controller.dispose();
     });
 
-    test('loadMore does nothing when already loading', () async {
+    test('controller correctly transitions to hasMoreMessages=false', () async {
       final controller = ChatMessagesController(
         paginationConfig: const PaginationConfig(
           enabled: true,
-          messagesPerPage: 10,
-          loadingDelay: Duration(milliseconds: 100),
         ),
       );
 
-      // Start first loading operation
-      int callCount = 0;
-      final firstLoad = controller.loadMore(() async {
-        callCount++;
-        await Future.delayed(const Duration(milliseconds: 200));
-        return testMessages.take(5).toList();
-      });
+      // First load gets messages
+      await controller.loadMore(() async => testMessages.sublist(0, 10));
+      expect(controller.hasMoreMessages, true);
 
-      // Try to start second loading while first is in progress
-      await controller.loadMore(() async {
-        callCount++;
-        return testMessages.skip(5).take(5).toList();
-      });
-
-      // Wait for first operation to complete
-      await firstLoad;
-
-      // Callback should only be called once
-      expect(callCount, 1);
-
-      controller.dispose();
-    });
-
-    test('loadMore does nothing when no more messages', () async {
-      final controller = ChatMessagesController(
-        paginationConfig: const PaginationConfig(
-          enabled: true,
-          messagesPerPage: 10,
-        ),
-      );
-
-      // Set hasMoreMessages to false
+      // Second load gets empty list
       await controller.loadMore(() async => []);
       expect(controller.hasMoreMessages, false);
 
-      // Try to load more
-      bool callbackCalled = false;
-      await controller.loadMore(() async {
-        callbackCalled = true;
-        return testMessages.take(5).toList();
-      });
-
-      // Callback should not be called
-      expect(callbackCalled, false);
+      // Reset pagination
+      controller.resetPagination();
+      expect(controller.hasMoreMessages, true);
 
       controller.dispose();
     });

@@ -17,20 +17,16 @@ void main() {
 
     testWidgets('Should show loading indicator when isLoading is true',
         (WidgetTester tester) async {
-      // Arrange: Create config with loading enabled
+      // Arrange: Create loading config with loading enabled
       const loadingConfig = LoadingConfig(
         isLoading: true,
-      );
-
-      final config = AiChatConfig(
-        loadingConfig: loadingConfig,
       );
 
       // Act: Render the chat widget
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: controller,
-          config: config,
+          loadingConfig: loadingConfig,
         ),
       );
 
@@ -40,7 +36,7 @@ void main() {
 
     testWidgets('Should show custom loading indicator when provided',
         (WidgetTester tester) async {
-      // Arrange: Create config with custom loading indicator
+      // Arrange: Create loading config with custom indicator
       final customIndicator = Container(
         width: 50,
         height: 50,
@@ -58,15 +54,11 @@ void main() {
         loadingIndicator: customIndicator,
       );
 
-      final config = AiChatConfig(
-        loadingConfig: loadingConfig,
-      );
-
       // Act: Render the chat widget
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: controller,
-          config: config,
+          loadingConfig: loadingConfig,
         ),
       );
 
@@ -95,20 +87,16 @@ void main() {
 
     testWidgets('Should show typing indicator when typing users are provided',
         (WidgetTester tester) async {
-      // Arrange: Create config with typing users
+      // Arrange: Create typing users list
       final typingUsers = [
         const ChatUser(id: 'ai-1', name: 'AI Assistant'),
       ];
-
-      final config = AiChatConfig(
-        typingUsers: typingUsers,
-      );
 
       // Act: Render the chat widget
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: controller,
-          config: config,
+          typingUsers: typingUsers,
         ),
       );
 
@@ -132,7 +120,7 @@ void main() {
 
     testWidgets('Should respect typingIndicatorColor when set',
         (WidgetTester tester) async {
-      // Arrange: Create config with typing users and custom color
+      // Arrange: Create typing users and loading config with custom color
       final typingUsers = [
         const ChatUser(id: 'ai-1', name: 'AI Assistant'),
       ];
@@ -141,16 +129,12 @@ void main() {
         typingIndicatorColor: Colors.purple,
       );
 
-      final config = AiChatConfig(
-        typingUsers: typingUsers,
-        loadingConfig: loadingConfig,
-      );
-
       // Act: Render the chat widget
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: controller,
-          config: config,
+          typingUsers: typingUsers,
+          loadingConfig: loadingConfig,
         ),
       );
 
@@ -166,39 +150,31 @@ void main() {
       final stateController = ChatMessagesController();
 
       // Start with loading enabled
-      var loadingConfig = const LoadingConfig(
+      const initialLoadingConfig = LoadingConfig(
         isLoading: true,
-      );
-
-      var config = AiChatConfig(
-        loadingConfig: loadingConfig,
       );
 
       // Act: Render the chat widget
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: stateController,
-          config: config,
+          loadingConfig: initialLoadingConfig,
         ),
       );
 
       // Verify loading indicator is initially visible
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
 
-      // Update config to disable loading
-      loadingConfig = const LoadingConfig(
+      // Update loading config to disable loading
+      const updatedLoadingConfig = LoadingConfig(
         isLoading: false,
-      );
-
-      config = AiChatConfig(
-        loadingConfig: loadingConfig,
       );
 
       // Re-render with updated config
       await tester.pumpWidget(
         TestUtils.createTestApp(
           controller: stateController,
-          config: config,
+          loadingConfig: updatedLoadingConfig,
         ),
       );
 
