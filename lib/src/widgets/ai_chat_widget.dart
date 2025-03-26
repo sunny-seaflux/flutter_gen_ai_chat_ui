@@ -1,6 +1,7 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'dart:math' as math;
 
 import '../controllers/chat_messages_controller.dart';
 import '../models/ai_chat_config.dart';

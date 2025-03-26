@@ -75,9 +75,7 @@ class ChatInput extends StatelessWidget {
       spellCheckConfiguration: options.spellCheckConfiguration,
       magnifierConfiguration: options.magnifierConfiguration,
       onTapOutside: (event) {
-        // Never unfocus the text field when tapping outside
-        // This helps prevent keyboard focus issues with the send button
-        // and ensures a more consistent typing experience
+        // Let the parent GestureDetector handle focus
       },
     );
 
@@ -197,20 +195,36 @@ class ChatInput extends StatelessWidget {
 
     // Skip Material if useOuterMaterial is false
     if (!options.useOuterMaterial) {
-      return result;
+      return GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          if (!options.unfocusOnTapOutside) {
+            focusNode?.requestFocus();
+          }
+        },
+        child: result,
+      );
     }
 
     // Optional Material styling
-    return Material(
-      color: options.materialColor,
-      elevation: options.materialElevation ?? 0.0,
-      shape: options.materialShape,
-      shadowColor: Colors.transparent,
-      child: Padding(
-        padding: options.materialPadding != null
-            ? options.materialPadding!
-            : EdgeInsets.zero,
-        child: result,
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        if (!options.unfocusOnTapOutside) {
+          focusNode?.requestFocus();
+        }
+      },
+      child: Material(
+        color: options.materialColor,
+        elevation: options.materialElevation ?? 0.0,
+        shape: options.materialShape,
+        shadowColor: Colors.transparent,
+        child: Padding(
+          padding: options.materialPadding != null
+              ? options.materialPadding!
+              : EdgeInsets.zero,
+          child: result,
+        ),
       ),
     );
   }
