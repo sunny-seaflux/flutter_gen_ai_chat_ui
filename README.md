@@ -3,7 +3,9 @@
 [![pub package](https://img.shields.io/pub/v/flutter_gen_ai_chat_ui.svg)](https://pub.dev/packages/flutter_gen_ai_chat_ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A modern, customizable chat UI for AI applications built with Flutter. Features streaming responses, markdown support, and rich customization options.
+A modern, minimalistic chat UI kit designed specifically for AI applications built with Flutter. Create beautiful interfaces for ChatGPT, Google Gemini, Anthropic Claude, Llama, and other LLM-powered chatbots with features like streaming responses, markdown support, code highlighting, and extensive customization options.
+
+Perfect for building AI assistants, customer support bots, knowledge base chatbots, language tutors, and any conversational AI application.
 
 > **Development Status**: This package is under active development. You may encounter breaking changes with each update as we improve the API and add new features. Please check the CHANGELOG before updating to a new version.
 
@@ -35,28 +37,38 @@ A modern, customizable chat UI for AI applications built with Flutter. Features 
 
 ### Core Features
 - 🎨 Dark/light mode with adaptive theming
-- 💫 Word-by-word streaming with animations
-- 📝 Enhanced markdown support with code highlighting
+- 💫 Word-by-word streaming with animations (like ChatGPT and Claude)
+- 📝 Enhanced markdown support with code highlighting for technical content
 - 🎤 Optional speech-to-text integration
 - 📱 Responsive layout with customizable width
-- 🌐 RTL language support
-- ⚡ High performance message handling
-- 📊 Improved pagination support
+- 🌐 RTL language support for global applications
+- ⚡ High performance message handling for large conversations
+- 📊 Improved pagination support for message history
 
 ### AI-Specific Features
-- 👋 Customizable welcome message
-- ❓ Example questions component
-- 💬 Persistent example questions
-- 🔄 AI typing indicators
-- 📜 Streaming markdown rendering
+- 👋 Customizable welcome message similar to ChatGPT and other AI assistants
+- ❓ Example questions component for user guidance
+- 💬 Persistent example questions for better user experience
+- 🔄 AI typing indicators like modern chatbot interfaces
+- 📜 Streaming markdown rendering for code and rich content
 
 ### UI Components
-- 💬 Customizable message bubbles
+- 💬 Customizable message bubbles with modern design options
 - ⌨️ Multiple input field styles (minimal, glassmorphic, custom)
-- 🔄 Loading indicators with shimmer
-- ⬇️ Smart scroll management
-- 🎨 Enhanced theme customization
-- 📝 Better code block styling
+- 🔄 Loading indicators with shimmer effects
+- ⬇️ Smart scroll management for chat history
+- 🎨 Enhanced theme customization to match your brand
+- 📝 Better code block styling for developers
+
+## Integration with Popular AI Models
+This UI kit works seamlessly with:
+- OpenAI (ChatGPT, GPT-4)
+- Google (Gemini, PaLM)
+- Anthropic (Claude)
+- Mistral AI
+- Llama 2/3
+- Cohere
+- And any custom AI/LLM API
 
 ## Installation
 
@@ -64,7 +76,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  flutter_gen_ai_chat_ui: ^2.0.2
+  flutter_gen_ai_chat_ui: ^2.0.3
 ```
 
 Then run:
@@ -253,7 +265,7 @@ InputOptions.custom(
 )
 ```
 
-#### Always-Visible Send Button Without Focus Issues (version 2.0.2+)
+#### Always-Visible Send Button Without Focus Issues (version 2.0.3+)
 
 The send button is now hardcoded to always be visible by design, regardless of text content. This removes the need for an explicit setting and ensures a consistent experience across the package.
 

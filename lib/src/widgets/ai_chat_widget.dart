@@ -549,7 +549,7 @@ class _AiChatWidgetState extends State<AiChatWidget>
             child: Row(
               children: [
                 Icon(
-                  effectiveConfig.iconData ?? Icons.chat_bubble_outline_rounded,
+                  Icons.chat_bubble_outline_rounded,
                   size: effectiveConfig.iconSize ?? 18,
                   color: effectiveConfig.iconColor ??
                       (isDarkMode

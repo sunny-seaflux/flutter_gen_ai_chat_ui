@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.0.3 - [2024-06-30] SEO & Static Analysis Improvements
+
+### Changed
+- Enhanced package description with more AI-specific keywords for better discoverability
+- Added comprehensive keywords section to pubspec.yaml for improved searchability
+- Updated permission_handler dependency to v12.0.0+1
+- Fixed static analysis warnings and errors in ai_chat_widget.dart
+- Improved example app descriptions with AI model-specific terms
+- Added detailed AI model integration section to README
+- Enhanced feature descriptions for better discoverability
+
 ## 2.0.2 - [2023-03-15] Input Behavior Improvements
 
 ### Changed
