@@ -327,9 +327,7 @@ class _AiChatWidgetState extends State<AiChatWidget>
                               typingIndicator:
                                   ((widget.loadingConfig?.isLoading ?? false) ||
                                           widget.isLoading)
-                                      ? widget.loadingConfig
-                                              ?.loadingIndicator ??
-                                          widget.loadingIndicator
+                                      ? widget.loadingConfig?.loadingIndicator
                                       : null,
                             ),
                           ),
@@ -339,7 +337,6 @@ class _AiChatWidgetState extends State<AiChatWidget>
                                   false))
                             Center(
                               child: widget.loadingConfig?.loadingIndicator ??
-                                  widget.loadingIndicator ??
                                   const CircularProgressIndicator(),
                             ),
                         ],
@@ -354,6 +351,8 @@ class _AiChatWidgetState extends State<AiChatWidget>
                     child: Center(
                       child: SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
+                        // TODO: Remove this after welcomeMessageBuilder is fully deprecated
+                        // ignore: deprecated_member_use_from_same_package
                         child: widget.welcomeMessageBuilder?.call() ??
                             _buildWelcomeMessage(context),
                       ),
