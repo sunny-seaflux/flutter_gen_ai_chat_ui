@@ -248,6 +248,7 @@ class _AiChatWidgetState extends State<AiChatWidget>
   /// Returns the effective typing users list, including the AI user when loading
   /// if no other typing users are provided
   List<ChatUser> _getEffectiveTypingUsers() {
+    // ignore: deprecated_member_use_from_same_package
     final isLoading =
         (widget.loadingConfig?.isLoading ?? false) || widget.isLoading;
 
@@ -520,31 +521,28 @@ class _AiChatWidgetState extends State<AiChatWidget>
           onTap: () => handleExampleQuestionTap(question.question),
           borderRadius: BorderRadius.circular(16),
           child: Container(
-            padding: effectiveConfig.containerPadding ??
-                const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-            decoration: effectiveConfig.containerDecoration ??
-                BoxDecoration(
-                  color:
-                      primaryColor.withValues(alpha: isDarkMode ? 0.12 : 0.06),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                    color:
-                        primaryColor.withValues(alpha: isDarkMode ? 0.3 : 0.15),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
+            padding: effectiveConfig.containerPadding,
+            decoration: effectiveConfig.containerDecoration != null
+                ? effectiveConfig.containerDecoration
+                : BoxDecoration(
+                    color: primaryColor.withValues(
+                        alpha: isDarkMode ? 0.12 : 0.06),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
                       color: primaryColor.withValues(
-                          alpha: isDarkMode ? 0.12 : 0.04),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                      spreadRadius: -2,
+                          alpha: isDarkMode ? 0.3 : 0.15),
+                      width: 1,
                     ),
-                  ],
-                ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: primaryColor.withValues(
+                            alpha: isDarkMode ? 0.12 : 0.04),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                        spreadRadius: -2,
+                      ),
+                    ],
+                  ),
             child: Row(
               children: [
                 Icon(
