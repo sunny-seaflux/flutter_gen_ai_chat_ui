@@ -499,38 +499,37 @@ class _AiChatWidgetState extends State<AiChatWidget>
           borderRadius: BorderRadius.circular(16),
           child: Container(
             padding: effectiveConfig.containerPadding,
-            decoration: effectiveConfig.containerDecoration != null
-                ? effectiveConfig.containerDecoration
-                : BoxDecoration(
-                    color: primaryColor.withValues(
-                        alpha: isDarkMode ? 0.12 : 0.06),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: primaryColor.withValues(
-                          alpha: isDarkMode ? 0.3 : 0.15),
-                      width: 1,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: primaryColor.withValues(
-                            alpha: isDarkMode ? 0.12 : 0.04),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
-                        spreadRadius: -2,
-                      ),
-                    ],
+            decoration: effectiveConfig.containerDecoration ??
+                BoxDecoration(
+                  color:
+                      primaryColor.withValues(alpha: isDarkMode ? 0.12 : 0.06),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color:
+                        primaryColor.withValues(alpha: isDarkMode ? 0.3 : 0.15),
+                    width: 1,
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: primaryColor.withValues(
+                          alpha: isDarkMode ? 0.12 : 0.04),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                      spreadRadius: -2,
+                    ),
+                  ],
+                ),
             child: Row(
               children: [
                 Icon(
                   Icons.chat_bubble_outline_rounded,
-                  size: effectiveConfig.iconSize ?? 18,
+                  size: effectiveConfig.iconSize,
                   color: effectiveConfig.iconColor ??
                       (isDarkMode
                           ? Colors.white.withValues(alpha: 0.8)
                           : primaryColor.withValues(alpha: 0.8)),
                 ),
-                SizedBox(width: effectiveConfig.spacing ?? 12),
+                SizedBox(width: effectiveConfig.spacing),
                 Expanded(
                   child: Text(
                     question.question,
@@ -549,7 +548,7 @@ class _AiChatWidgetState extends State<AiChatWidget>
                 Icon(
                   effectiveConfig.trailingIconData ??
                       Icons.arrow_forward_ios_rounded,
-                  size: effectiveConfig.trailingIconSize ?? 14,
+                  size: effectiveConfig.trailingIconSize,
                   color: effectiveConfig.trailingIconColor ??
                       (isDarkMode
                           ? Colors.white.withValues(alpha: 0.5)

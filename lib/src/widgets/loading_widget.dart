@@ -205,8 +205,6 @@ class _LoadingWidgetState extends State<LoadingWidget> {
 
   /// Builds the box decoration based on widget properties.
   BoxDecoration _buildDecoration(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     // Use provided decoration if available
     if (widget.containerDecoration != null) {
       return widget.containerDecoration!;
@@ -233,7 +231,7 @@ class _LoadingWidgetState extends State<LoadingWidget> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final baseColor = widget.shimmerBaseColor ??
         (isDark
-            ? Theme.of(context).colorScheme.surface.withOpacity(0.5)
+            ? Theme.of(context).colorScheme.surface.withValues(alpha: 0.5)
             : const Color(0xFFF7F7F8));
     final highlightColor = widget.shimmerHighlightColor ??
         (isDark ? Theme.of(context).colorScheme.surface : Colors.white);
@@ -331,14 +329,14 @@ class _LoadingWidgetState extends State<LoadingWidget> {
           child: Container(
             decoration: BoxDecoration(
               color: isDark
-                  ? Colors.white.withOpacity(widget.glassmorphicOpacity)
-                  : Colors.black.withOpacity(widget.glassmorphicOpacity),
+                  ? Colors.white.withValues(alpha: widget.glassmorphicOpacity)
+                  : Colors.black.withValues(alpha: widget.glassmorphicOpacity),
               borderRadius: widget.borderRadius ?? BorderRadius.circular(16),
               border: widget.border ??
                   Border.all(
                     color: isDark
-                        ? Colors.white.withOpacity(0.2)
-                        : Colors.white.withOpacity(0.3),
+                        ? Colors.white.withValues(alpha: 0.2)
+                        : Colors.white.withValues(alpha: 0.3),
                     width: 1.5,
                   ),
             ),

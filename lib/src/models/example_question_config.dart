@@ -38,7 +38,8 @@ class ExampleQuestionConfig {
   final Color? iconColor;
 
   /// Icon data for the trailing icon
-  final IconData trailingIconData;
+  /// Made nullable to avoid analyzer warnings
+  final IconData? trailingIconData;
 
   /// Size of the trailing icon
   final double trailingIconSize;

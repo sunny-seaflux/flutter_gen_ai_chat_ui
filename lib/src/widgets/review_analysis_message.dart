@@ -42,9 +42,9 @@ class ReviewAnalysisMessage extends StatelessWidget {
         const SizedBox(height: 16),
 
         // Key Strengths
-        if ((analysis['key_strengths'] as List).isNotEmpty) ...[
+        if ((analysis['key_strengths'] as List<dynamic>).isNotEmpty) ...[
           _buildStrengths(
-            analysis['key_strengths'] as List,
+            analysis['key_strengths'] as List<dynamic>,
             theme,
             isDark,
           ),
@@ -61,7 +61,7 @@ class ReviewAnalysisMessage extends StatelessWidget {
 
         // Professional Rating
         _buildProfessionalRating(
-          rating['category_ratings'] as List,
+          rating['category_ratings'] as List<dynamic>,
           theme,
           isDark,
         ),
@@ -150,7 +150,8 @@ class ReviewAnalysisMessage extends StatelessWidget {
     );
   }
 
-  Widget _buildStrengths(List strengths, ThemeData theme, bool isDark) {
+  Widget _buildStrengths(
+      List<dynamic> strengths, ThemeData theme, bool isDark) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -240,7 +241,7 @@ class ReviewAnalysisMessage extends StatelessWidget {
   }
 
   Widget _buildProfessionalRating(
-    List categoryRatings,
+    List<dynamic> categoryRatings,
     ThemeData theme,
     bool isDark,
   ) {
