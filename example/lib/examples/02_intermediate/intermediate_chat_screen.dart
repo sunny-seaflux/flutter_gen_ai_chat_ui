@@ -285,22 +285,18 @@ class _IntermediateChatScreenState extends State<IntermediateChatScreen> {
 
   /// Custom typing indicator with blinking dots
   Widget _buildCustomLoadingIndicator(ColorScheme colorScheme) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: List.generate(3, (index) {
-        return Container(
-          width: 8,
-          height: 8,
-          margin: const EdgeInsets.symmetric(horizontal: 2),
-          decoration: BoxDecoration(
-            color: colorScheme.primary,
-            shape: BoxShape.circle,
-          ),
-          child: _buildBlinkingDot(
-            duration: Duration(milliseconds: 500 + index * 100),
-          ),
-        );
-      }),
+    return LoadingWidget(
+      texts: [
+        "Generating response...",
+        "Thinking...",
+        "Loading...",
+        "Please wait...",
+        "Loading data...",
+        "Processing...",
+        "Please wait...",
+      ],
+      shimmerBaseColor: colorScheme.primary,
+      shimmerHighlightColor: colorScheme.primaryContainer,
     );
   }
 

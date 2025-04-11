@@ -14,6 +14,7 @@ export 'src/models/welcome_message_config.dart';
 // Theme
 export 'src/theme/custom_theme_extension.dart';
 // Utils
+export 'src/utils/color_extensions.dart';
 export 'src/utils/glassmorphic_container.dart';
 // Widgets
 export 'src/widgets/ai_chat_widget.dart';
