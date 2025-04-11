@@ -20,6 +20,7 @@ class WelcomeMessageConfig {
     ),
     this.questionSpacing = 12.0,
     this.animation = const Duration(milliseconds: 500),
+    this.builder,
   });
 
   /// The title text of the welcome message
@@ -55,6 +56,9 @@ class WelcomeMessageConfig {
   /// Duration for the welcome message animation
   final Duration animation;
 
+  /// Custom builder function to create a welcome message widget
+  final Widget Function()? builder;
+
   /// Creates a copy of this config with the given fields replaced with new values
   WelcomeMessageConfig copyWith({
     String? title,
@@ -68,6 +72,7 @@ class WelcomeMessageConfig {
     EdgeInsets? questionsSectionPadding,
     double? questionSpacing,
     Duration? animation,
+    Widget Function()? builder,
   }) {
     return WelcomeMessageConfig(
       title: title ?? this.title,
@@ -85,6 +90,7 @@ class WelcomeMessageConfig {
           questionsSectionPadding ?? this.questionsSectionPadding,
       questionSpacing: questionSpacing ?? this.questionSpacing,
       animation: animation ?? this.animation,
+      builder: builder ?? this.builder,
     );
   }
 }

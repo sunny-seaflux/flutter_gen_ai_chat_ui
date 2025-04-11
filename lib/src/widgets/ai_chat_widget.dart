@@ -47,13 +47,6 @@ class AiChatWidget extends StatefulWidget {
     this.streamingDuration = const Duration(milliseconds: 30),
     this.markdownStyleSheet,
     this.aiName = 'AI',
-
-    // Legacy parameters, deprecated
-    @Deprecated('Use loadingConfig.loadingIndicator instead')
-    this.loadingIndicator,
-    @Deprecated('Use welcomeMessageConfig.builder instead')
-    this.welcomeMessageBuilder,
-    @Deprecated('Use loadingConfig.isLoading instead') this.isLoading = false,
   });
 
   /// The current user in the conversation
@@ -134,16 +127,6 @@ class AiChatWidget extends StatefulWidget {
 
   /// Style sheet for markdown rendering
   final MarkdownStyleSheet? markdownStyleSheet;
-
-  // Deprecated properties
-  @Deprecated('Use loadingConfig.loadingIndicator instead')
-  final Widget? loadingIndicator;
-
-  @Deprecated('Use welcomeMessageConfig.builder instead')
-  final Widget Function()? welcomeMessageBuilder;
-
-  @Deprecated('Use loadingConfig.isLoading instead')
-  final bool isLoading;
 
   @override
   State<AiChatWidget> createState() => _AiChatWidgetState();
@@ -248,9 +231,7 @@ class _AiChatWidgetState extends State<AiChatWidget>
   /// Returns the effective typing users list, including the AI user when loading
   /// if no other typing users are provided
   List<ChatUser> _getEffectiveTypingUsers() {
-    // ignore: deprecated_member_use_from_same_package
-    final isLoading =
-        (widget.loadingConfig?.isLoading ?? false) || widget.isLoading;
+    final isLoading = widget.loadingConfig?.isLoading ?? false;
 
     // If we have explicitly set typing users, use those regardless of loading state
     if (widget.typingUsers != null && widget.typingUsers!.isNotEmpty) {
@@ -326,14 +307,12 @@ class _AiChatWidgetState extends State<AiChatWidget>
                                   widget.scrollToBottomOptions ??
                                       const ScrollToBottomOptions(),
                               typingIndicator:
-                                  ((widget.loadingConfig?.isLoading ?? false) ||
-                                          widget.isLoading)
+                                  (widget.loadingConfig?.isLoading ?? false)
                                       ? widget.loadingConfig?.loadingIndicator
                                       : null,
                             ),
                           ),
-                          if (((widget.loadingConfig?.isLoading ?? false) ||
-                                  widget.isLoading) &&
+                          if ((widget.loadingConfig?.isLoading ?? false) &&
                               (widget.loadingConfig?.showCenteredIndicator ??
                                   false))
                             Center(
@@ -352,9 +331,7 @@ class _AiChatWidgetState extends State<AiChatWidget>
                     child: Center(
                       child: SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
-                        // TODO: Remove this after welcomeMessageBuilder is fully deprecated
-                        // ignore: deprecated_member_use_from_same_package
-                        child: widget.welcomeMessageBuilder?.call() ??
+                        child: widget.welcomeMessageConfig?.builder?.call() ??
                             _buildWelcomeMessage(context),
                       ),
                     ),
