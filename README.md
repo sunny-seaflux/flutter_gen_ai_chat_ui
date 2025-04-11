@@ -76,7 +76,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  flutter_gen_ai_chat_ui: ^2.0.3
+  flutter_gen_ai_chat_ui: ^2.0.4
 ```
 
 Then run:
@@ -265,7 +265,7 @@ InputOptions.custom(
 )
 ```
 
-#### Always-Visible Send Button Without Focus Issues (version 2.0.3+)
+#### Always-Visible Send Button Without Focus Issues (version 2.0.4+)
 
 The send button is now hardcoded to always be visible by design, regardless of text content. This removes the need for an explicit setting and ensures a consistent experience across the package.
 
