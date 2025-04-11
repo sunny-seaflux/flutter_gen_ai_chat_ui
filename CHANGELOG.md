@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.4 - [2024-07-05] Code Quality & Publication Improvements
+
+### Changed
+- Fixed all static analysis warnings to achieve top pub.dev score
+- Made property types more consistent with proper nullability
+- Improved type safety throughout the codebase
+- Fixed import paths to avoid deprecated references
+- Updated example question config to handle nullable properties correctly
+- Enhanced review analysis widget with proper type annotations
+
 ## 2.0.3 - [2024-06-30] SEO & Static Analysis Improvements
 
 ### Changed
