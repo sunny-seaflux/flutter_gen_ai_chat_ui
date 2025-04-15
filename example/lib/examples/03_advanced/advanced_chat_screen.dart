@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen_ai_chat_ui/flutter_gen_ai_chat_ui.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen_ai_chat_ui/src/utils/color_extensions.dart';
 
 import '../../models/app_state.dart';
 import '../../services/ai_service.dart';
@@ -60,8 +61,8 @@ class _AdvancedChatScreenState extends State<AdvancedChatScreen> {
             borderRadius: BorderRadius.circular(12),
             gradient: LinearGradient(
               colors: [
-                Colors.purple.withOpacity(0.1),
-                Colors.blue.withOpacity(0.1)
+                Colors.purple.withOpacityCompat(0.1),
+                Colors.blue.withOpacityCompat(0.1)
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -77,8 +78,8 @@ class _AdvancedChatScreenState extends State<AdvancedChatScreen> {
             borderRadius: BorderRadius.circular(12),
             gradient: LinearGradient(
               colors: [
-                Colors.green.withOpacity(0.1),
-                Colors.teal.withOpacity(0.1)
+                Colors.green.withOpacityCompat(0.1),
+                Colors.teal.withOpacityCompat(0.1)
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -94,8 +95,8 @@ class _AdvancedChatScreenState extends State<AdvancedChatScreen> {
             borderRadius: BorderRadius.circular(12),
             gradient: LinearGradient(
               colors: [
-                Colors.amber.withOpacity(0.1),
-                Colors.orange.withOpacity(0.1)
+                Colors.amber.withOpacityCompat(0.1),
+                Colors.orange.withOpacityCompat(0.1)
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -111,8 +112,8 @@ class _AdvancedChatScreenState extends State<AdvancedChatScreen> {
             borderRadius: BorderRadius.circular(12),
             gradient: LinearGradient(
               colors: [
-                Colors.pink.withOpacity(0.1),
-                Colors.red.withOpacity(0.1)
+                Colors.pink.withOpacityCompat(0.1),
+                Colors.red.withOpacityCompat(0.1)
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -355,8 +356,8 @@ Try asking questions or exploring the settings panel to see these features in ac
                             code: TextStyle(
                               fontFamily: 'monospace',
                               backgroundColor: isDark
-                                  ? Colors.black.withOpacity(0.3)
-                                  : Colors.grey.withOpacity(0.2),
+                                  ? Colors.black.withOpacityCompat(0.3)
+                                  : Colors.grey.withOpacityCompat(0.2),
                             ),
                             codeblockDecoration: BoxDecoration(
                               color: advancedTheme.codeBlockBackground,

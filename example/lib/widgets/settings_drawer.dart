@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen_ai_chat_ui/src/utils/color_extensions.dart';
 
 import '../models/app_state.dart';
 
@@ -19,15 +20,15 @@ class SettingsDrawer extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: isDarkMode
-              ? Colors.black.withOpacity(0.85)
-              : Colors.white.withOpacity(0.9),
+              ? Colors.black.withOpacityCompat(0.85)
+              : Colors.white.withOpacityCompat(0.9),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(24),
             bottomLeft: Radius.circular(24),
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withOpacityCompat(0.2),
               blurRadius: 20,
               offset: const Offset(-5, 0),
             ),
@@ -197,8 +198,8 @@ class SettingsDrawer extends StatelessWidget {
                             Card(
                               elevation: 0,
                               color: isDarkMode
-                                  ? Colors.white10
-                                  : colorScheme.primary.withOpacity(0.1),
+                                  ? Colors.white.withOpacityCompat(0.1)
+                                  : colorScheme.primary.withOpacityCompat(0.1),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -301,8 +302,9 @@ class SettingsDrawer extends StatelessWidget {
                     Text(
                       'Version 1.0.0',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color:
-                              isDarkMode ? Colors.grey[400] : Colors.grey[600]),
+                          color: isDarkMode
+                              ? Colors.grey.withOpacityCompat(0.4)
+                              : Colors.grey.withOpacityCompat(0.6)),
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -311,7 +313,7 @@ class SettingsDrawer extends StatelessWidget {
                         color: Colors.transparent,
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
-                          color: colorScheme.primary.withOpacity(0.5),
+                          color: colorScheme.primary.withOpacityCompat(0.5),
                           width: 1,
                         ),
                       ),
@@ -354,7 +356,7 @@ class SettingsDrawer extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.primary.withOpacity(0.3),
+            color: colorScheme.primary.withOpacityCompat(0.3),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -378,7 +380,7 @@ class SettingsDrawer extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withOpacityCompat(0.2),
                   shape: BoxShape.circle,
                 ),
                 child: IconButton(
@@ -394,7 +396,7 @@ class SettingsDrawer extends StatelessWidget {
           Text(
             'Customize your Dila chat experience',
             style: TextStyle(
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.withOpacityCompat(0.8),
               fontSize: 14,
             ),
           ),
@@ -434,7 +436,7 @@ class SettingsDrawer extends StatelessWidget {
           width: 48,
           height: 48,
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withOpacityCompat(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Icon(icon, color: color),
@@ -484,7 +486,7 @@ class SettingsDrawer extends StatelessWidget {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withOpacityCompat(0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: color),
@@ -516,9 +518,9 @@ class SettingsDrawer extends StatelessWidget {
             child: SliderTheme(
               data: SliderTheme.of(context).copyWith(
                 activeTrackColor: color,
-                inactiveTrackColor: color.withOpacity(0.2),
+                inactiveTrackColor: color.withOpacityCompat(0.2),
                 thumbColor: color,
-                overlayColor: color.withOpacity(0.2),
+                overlayColor: color.withOpacityCompat(0.2),
               ),
               child: Slider(
                 value: value,
@@ -549,7 +551,7 @@ class SettingsDrawer extends StatelessWidget {
           width: 48,
           height: 48,
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withOpacityCompat(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Icon(icon, color: color),

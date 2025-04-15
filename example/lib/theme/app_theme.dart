@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen_ai_chat_ui/flutter_gen_ai_chat_ui.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen_ai_chat_ui/src/utils/color_extensions.dart';
 
 class AppTheme {
   // Modern color palette
@@ -83,7 +84,7 @@ class AppTheme {
     ),
     cardTheme: CardTheme(
       elevation: 3,
-      shadowColor: Colors.black.withOpacity(0.1),
+      shadowColor: Colors.black.withOpacityCompat(0.1),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
@@ -112,10 +113,10 @@ class AppTheme {
       space: 1,
     ),
     navigationBarTheme: NavigationBarThemeData(
-      indicatorColor: _primaryColor.withOpacity(0.12),
+      indicatorColor: _primaryColor.withOpacityCompat(0.12),
       backgroundColor: _lightSurfaceColor,
       elevation: 3,
-      shadowColor: Colors.black.withOpacity(0.05),
+      shadowColor: Colors.black.withOpacityCompat(0.05),
       labelTextStyle: WidgetStateProperty.all(
         const TextStyle(
           fontSize: 12,
@@ -186,7 +187,7 @@ class AppTheme {
     ),
     cardTheme: CardTheme(
       elevation: 6,
-      shadowColor: Colors.black.withOpacity(0.3),
+      shadowColor: Colors.black.withOpacityCompat(0.3),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
@@ -216,10 +217,10 @@ class AppTheme {
       space: 1,
     ),
     navigationBarTheme: NavigationBarThemeData(
-      indicatorColor: _primaryColor.withOpacity(0.2),
+      indicatorColor: _primaryColor.withOpacityCompat(0.2),
       backgroundColor: _darkSurfaceColor,
       elevation: 3,
-      shadowColor: Colors.black.withOpacity(0.2),
+      shadowColor: Colors.black.withOpacityCompat(0.2),
       labelTextStyle: WidgetStateProperty.all(
         const TextStyle(
           fontSize: 12,

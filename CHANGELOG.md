@@ -260,3 +260,15 @@
 ### Fixed
 - Scroll position detection for the scroll-to-bottom button
 - Message ordering when adding new messages
+
+## [2.0.x] - YYYY-MM-DD
+### Fixed
+- Added `withOpacityCompat` extension for full compatibility with all Flutter/Dart SDKs.
+- Migrated all usages of `.withOpacity(x)` and `.withValues(alpha: x)` to `.withOpacityCompat(x)`.
+- No more build errors for users on Flutter <3.27.0.
+
+## [2.0.5] - 2024-06-09
+### Fixed
+- Added `withOpacityCompat` extension for full compatibility with all Flutter/Dart SDKs.
+- Migrated all usages of `.withOpacity(x)` and `.withValues(alpha: x)` to `.withOpacityCompat(x)`.
+- No more build errors for users on Flutter <3.27.0.

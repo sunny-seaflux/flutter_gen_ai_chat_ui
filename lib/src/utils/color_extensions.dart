@@ -38,4 +38,20 @@ extension ColorExtensions on Color {
       blue ?? b.toInt(),
     );
   }
+
+  /// Backward-compatible opacity setter for Color.
+  ///
+  /// Uses [withValues] if available (Flutter 3.27.0+), otherwise falls back to [withOpacity].
+  /// This allows code to work across a wide range of Flutter/Dart SDKs.
+  Color withOpacityCompat(double opacity) {
+    // Clamp opacity between 0.0 and 1.0
+    final clamped = opacity.clamp(0.0, 1.0);
+    try {
+      // Try to use withValues if available (Flutter 3.27.0+)
+      return withValues(alpha: clamped);
+    } catch (_) {
+      // Fallback for older SDKs
+      return withOpacity(clamped);
+    }
+  }
 }

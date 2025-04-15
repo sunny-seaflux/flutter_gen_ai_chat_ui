@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen_ai_chat_ui/src/utils/color_extensions.dart';
 
 /// The main navigation page for all Flutter Gen AI Chat UI examples
 class ExamplesHomeScreen extends StatelessWidget {
@@ -89,7 +90,7 @@ class ExamplesHomeScreen extends StatelessWidget {
                   color: Theme.of(context)
                       .colorScheme
                       .onPrimaryContainer
-                      .withOpacity(0.8),
+                      .withOpacityCompat(0.8),
                 ),
           ),
         ],
@@ -121,7 +122,7 @@ class ExamplesHomeScreen extends StatelessWidget {
             Container(
               height: 100,
               decoration: BoxDecoration(
-                color: color.withOpacity(0.2),
+                color: color.withOpacityCompat(0.2),
               ),
               child: Center(
                 child: Icon(
@@ -216,7 +217,7 @@ class ExamplesHomeScreen extends StatelessWidget {
               ),
               label: Text(feature['label'] as String),
               backgroundColor:
-                  Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                  Theme.of(context).colorScheme.primary.withOpacityCompat(0.1),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
