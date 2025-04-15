@@ -76,7 +76,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  flutter_gen_ai_chat_ui: ^2.0.4
+  flutter_gen_ai_chat_ui: ^2.0.5
 ```
 
 Then run:
@@ -247,7 +247,7 @@ InputOptions.minimal(
 
 ```dart
 InputOptions.glassmorphic(
-  colors: [Colors.blue.withOpacity(0.2), Colors.purple.withOpacity(0.2)],
+  colors: [Colors.blue.withOpacityCompat(0.2), Colors.purple.withOpacityCompat(0.2)],
   borderRadius: 24.0,
   blurStrength: 10.0,
   hintText: 'Ask me anything...',
@@ -295,7 +295,7 @@ MessageOptions(
   
   // Styling
   bubbleStyle: BubbleStyle(
-    userBubbleColor: Colors.blue.withOpacity(0.1),
+    userBubbleColor: Colors.blue.withOpacityCompat(0.1),
     aiBubbleColor: Colors.white,
     userNameColor: Colors.blue.shade700,
     aiNameColor: Colors.purple.shade700,
@@ -305,142 +305,3 @@ MessageOptions(
   ),
 )
 ```
-
-### Loading Configuration
-
-```dart
-LoadingConfig(
-  isLoading: true,  // Whether the AI is currently generating a response
-  loadingIndicator: CustomLoadingWidget(),  // Custom loading indicator
-  typingIndicatorColor: Colors.blue,  // Color for the typing indicator
-  showCenteredIndicator: false,  // Show indicator in center or as typing
-)
-```
-
-### Pagination Configuration
-
-```dart
-PaginationConfig(
-  enabled: true,  // Enable pagination for large message histories
-  loadingIndicatorOffset: 100,  // How far from top to trigger loading
-  reverseOrder: true,  // Show newest messages at bottom
-)
-```
-
-## Advanced Features
-
-### Streaming Text
-
-To enable word-by-word text streaming:
-
-```dart
-AiChatWidget(
-  // ... other parameters
-  enableMarkdownStreaming: true,
-  streamingDuration: Duration(milliseconds: 30),
-  
-  onSendMessage: (message) async {
-    // Start with an empty message
-    final aiMessage = ChatMessage(
-      text: "",
-      user: aiUser,
-      createdAt: DateTime.now(),
-      isMarkdown: true,
-    );
-    
-    // Add to the chat
-    _chatController.addMessage(aiMessage);
-    
-    // Stream the response word by word
-    final response = "This is a **streaming** response with `code` and more...";
-    String accumulating = "";
-    
-    for (final word in response.split(" ")) {
-      await Future.delayed(Duration(milliseconds: 100));
-      accumulating += (accumulating.isEmpty ? "" : " ") + word;
-      
-      // Update the message with new text
-      _chatController.updateMessage(
-        aiMessage.copyWith(text: accumulating),
-      );
-    }
-  },
-)
-```
-
-### Welcome Message Configuration
-
-```dart
-// The welcome message is disabled by default and only appears 
-// when this configuration is provided
-WelcomeMessageConfig(
-  title: "Welcome to My AI Assistant",
-  containerPadding: EdgeInsets.all(24),
-  questionsSectionTitle: "Try asking me:",
-)
-```
-
-### Controller Methods
-
-```dart
-// Initialize controller
-final controller = ChatMessagesController();
-
-// Add a message
-controller.addMessage(ChatMessage(...));
-
-// Add multiple messages
-controller.addMessages([ChatMessage(...), ChatMessage(...)]);
-
-// Update a message (useful for streaming)
-controller.updateMessage(message.copyWith(text: newText));
-
-// Clear all messages
-controller.clearMessages();
-
-// Hide the welcome message
-controller.hideWelcomeMessage();
-
-// Show/hide welcome message programmatically
-controller.showWelcomeMessage = true;  // Show welcome message
-controller.showWelcomeMessage = false; // Hide welcome message
-
-// Manually scroll to bottom
-controller.scrollToBottom();
-
-// Load more messages (for pagination)
-controller.loadMore(() async {
-  return await fetchOlderMessages();
-});
-```
-
-## Platform Support
-
-✅ Android
-✅ iOS
-✅ Web
-✅ macOS
-✅ Windows
-✅ Linux
-
-## Examples
-
-Check the [example](example) directory for complete sample applications showcasing different features.
-
-## Development & Contributing
-
-We welcome contributions to improve the Flutter Gen AI Chat UI package! 
-
-Before submitting a pull request:
-1. Ensure your code follows the project style guidelines
-2. Add tests for any new features
-3. Update documentation as needed
-
-For maintainers releasing new versions, please refer to our [release checklist](doc/release_checklist.md) to ensure all necessary steps are completed before publishing.
-
-## License
-
-[MIT License](LICENSE)
-
----
-⭐ If you find this package helpful, please star the repository!
