@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import '../utils/color_extensions.dart';
 
 /// A container with a glassmorphic effect (blurred transparent background).
 class GlassmorphicContainer extends StatelessWidget {
@@ -97,19 +98,19 @@ class GlassmorphicContainer extends StatelessWidget {
           begin: begin,
           end: end,
           colors:
-              colors.map((color) => color.withValues(alpha: opacity)).toList(),
+              colors.map((color) => color.withOpacityCompat(opacity)).toList(),
         ),
         borderRadius: borderRadius,
         border: border
             ? Border.all(
-                color: borderColor.withValues(alpha: opacity),
+                color: borderColor.withOpacityCompat(opacity),
                 width: borderWidth,
               )
             : null,
         boxShadow: shadow
             ? [
                 BoxShadow(
-                  color: shadowColor.withValues(alpha: opacity),
+                  color: shadowColor.withOpacityCompat(opacity),
                   blurRadius: shadowBlur,
                   spreadRadius: shadowSpread,
                 ),

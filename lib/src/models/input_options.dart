@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../utils/color_extensions.dart';
 
 /// Controls how the input container's width should be sized
 enum InputContainerWidth {
@@ -214,8 +215,8 @@ class InputOptions {
   }) {
     final effectiveColors = colors ??
         [
-          Colors.white.withValues(alpha: 0.3),
-          Colors.white.withValues(alpha: 0.2),
+          Colors.white.withOpacityCompat(0.3),
+          Colors.white.withOpacityCompat(0.2),
         ];
 
     return InputOptions(
@@ -233,7 +234,7 @@ class InputOptions {
         ),
         borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(
-          color: Colors.white.withValues(alpha: 0.2),
+          color: Colors.white.withOpacityCompat(0.2),
           width: 1.5,
         ),
       ),

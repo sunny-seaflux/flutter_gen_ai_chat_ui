@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_streaming_text_markdown/flutter_streaming_text_markdown.dart';
+import '../utils/color_extensions.dart';
 
 /// A widget that animates text appearing character by character
 class AnimatedTextMessage extends StatefulWidget {
@@ -82,7 +83,7 @@ class _AnimatedTextMessageState extends State<AnimatedTextMessage>
                     p: widget.style,
                     code: widget.style.copyWith(
                       fontFamily: 'monospace',
-                      backgroundColor: Colors.grey.withValues(alpha: 0.2),
+                      backgroundColor: Colors.grey.withOpacityCompat(0.2),
                     ),
                   ),
                 )

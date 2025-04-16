@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/color_extensions.dart';
 
 /// A utility class to create glassmorphic decoration effects.
 class GlassmorphicDecoration {
@@ -40,19 +41,19 @@ class GlassmorphicDecoration {
         begin: begin,
         end: end,
         colors:
-            colors.map((color) => color.withValues(alpha: opacity)).toList(),
+            colors.map((color) => color.withOpacityCompat( opacity)).toList(),
       ),
       borderRadius: borderRadius,
       border: border
           ? Border.all(
-              color: borderColor.withValues(alpha: opacity),
+              color: borderColor.withOpacityCompat( opacity),
               width: borderWidth,
             )
           : null,
       boxShadow: shadow
           ? [
               BoxShadow(
-                color: shadowColor.withValues(alpha: opacity),
+                color: shadowColor.withOpacityCompat( opacity),
                 blurRadius: shadowBlur,
                 spreadRadius: shadowSpread,
               ),

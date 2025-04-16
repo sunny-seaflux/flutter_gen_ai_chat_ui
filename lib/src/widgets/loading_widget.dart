@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import '../utils/color_extensions.dart';
 
 /// A highly customizable loading widget that displays a shimmer effect with animated text.
 class LoadingWidget extends StatefulWidget {
@@ -231,8 +232,8 @@ class _LoadingWidgetState extends State<LoadingWidget> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final baseColor = widget.shimmerBaseColor ??
         (isDark
-            ? Theme.of(context).colorScheme.surface.withValues(alpha: 0.5)
-            : const Color(0xFFF7F7F8));
+            ? Theme.of(context).colorScheme.surface.withOpacityCompat(0.5)
+            : const Color(0xFFF7F8F8));
     final highlightColor = widget.shimmerHighlightColor ??
         (isDark ? Theme.of(context).colorScheme.surface : Colors.white);
 
@@ -329,14 +330,14 @@ class _LoadingWidgetState extends State<LoadingWidget> {
           child: Container(
             decoration: BoxDecoration(
               color: isDark
-                  ? Colors.white.withValues(alpha: widget.glassmorphicOpacity)
-                  : Colors.black.withValues(alpha: widget.glassmorphicOpacity),
+                  ? Colors.white.withOpacityCompat(widget.glassmorphicOpacity)
+                  : Colors.black.withOpacityCompat(widget.glassmorphicOpacity),
               borderRadius: widget.borderRadius ?? BorderRadius.circular(16),
               border: widget.border ??
                   Border.all(
                     color: isDark
-                        ? Colors.white.withValues(alpha: 0.2)
-                        : Colors.white.withValues(alpha: 0.3),
+                        ? Colors.white.withOpacityCompat(0.2)
+                        : Colors.white.withOpacityCompat(0.3),
                     width: 1.5,
                   ),
             ),

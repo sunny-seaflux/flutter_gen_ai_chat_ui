@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen_ai_chat_ui/src/utils/color_extensions.dart';
 import 'package:flutter_gen_ai_chat_ui/flutter_gen_ai_chat_ui.dart';
+import 'package:flutter_gen_ai_chat_ui/src/utils/color_extensions.dart';
 
 void main() {
   runApp(const ColorExtensionApp());
@@ -32,8 +34,8 @@ class ColorExtensionDemo extends StatelessWidget {
     // Various transformations using withValues
     final variants = [
       ColorVariant('Original', baseColor),
-      ColorVariant('Alpha 50%', baseColor.withValues(alpha: 0.5)),
-      ColorVariant('Alpha 25%', baseColor.withValues(alpha: 0.25)),
+      ColorVariant('Alpha 50%', baseColor.withOpacityCompat( 0.5)),
+      ColorVariant('Alpha 25%', baseColor.withOpacityCompat( 0.25)),
       ColorVariant('Red 255', baseColor.withValues(red: 255)),
       ColorVariant('Green 255', baseColor.withValues(green: 255)),
       ColorVariant('Blue 100', baseColor.withValues(blue: 100)),
