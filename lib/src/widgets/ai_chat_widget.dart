@@ -410,14 +410,14 @@ class _AiChatWidgetState extends State<AiChatWidget>
               boxShadow: [
                 BoxShadow(
                   color:
-                      Colors.black.withOpacityCompat( isDarkMode ? 0.3 : 0.08),
+                      Colors.black.withOpacityCompat(isDarkMode ? 0.3 : 0.08),
                   blurRadius: 20,
                   spreadRadius: -4,
                   offset: const Offset(0, 8),
                 ),
               ],
               border: Border.all(
-                color: primaryColor.withOpacityCompat( isDarkMode ? 0.2 : 0.15),
+                color: primaryColor.withOpacityCompat(isDarkMode ? 0.2 : 0.15),
                 width: 1.5,
               ),
             ),
@@ -445,12 +445,12 @@ class _AiChatWidgetState extends State<AiChatWidget>
                     ),
                 decoration: welcomeConfig?.questionsSectionDecoration ??
                     BoxDecoration(
-                      color: primaryColor.withValues(
-                          alpha: isDarkMode ? 0.15 : 0.08),
+                      color: primaryColor
+                          .withOpacityCompat(isDarkMode ? 0.15 : 0.08),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: primaryColor.withValues(
-                            alpha: isDarkMode ? 0.3 : 0.2),
+                        color: primaryColor
+                            .withOpacityCompat(isDarkMode ? 0.3 : 0.2),
                       ),
                     ),
                 child: Text(
@@ -503,17 +503,17 @@ class _AiChatWidgetState extends State<AiChatWidget>
             decoration: effectiveConfig.containerDecoration ??
                 BoxDecoration(
                   color:
-                      primaryColor.withOpacityCompat( isDarkMode ? 0.12 : 0.06),
+                      primaryColor.withOpacityCompat(isDarkMode ? 0.12 : 0.06),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color:
-                        primaryColor.withOpacityCompat( isDarkMode ? 0.3 : 0.15),
+                        primaryColor.withOpacityCompat(isDarkMode ? 0.3 : 0.15),
                     width: 1,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: primaryColor.withValues(
-                          alpha: isDarkMode ? 0.12 : 0.04),
+                      color: primaryColor
+                          .withOpacityCompat(isDarkMode ? 0.12 : 0.04),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                       spreadRadius: -2,
@@ -527,8 +527,8 @@ class _AiChatWidgetState extends State<AiChatWidget>
                   size: effectiveConfig.iconSize,
                   color: effectiveConfig.iconColor ??
                       (isDarkMode
-                          ? Colors.white.withOpacityCompat( 0.8)
-                          : primaryColor.withOpacityCompat( 0.8)),
+                          ? Colors.white.withOpacityCompat(0.8)
+                          : primaryColor.withOpacityCompat(0.8)),
                 ),
                 SizedBox(width: effectiveConfig.spacing),
                 Expanded(
@@ -539,8 +539,8 @@ class _AiChatWidgetState extends State<AiChatWidget>
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: isDarkMode
-                              ? Colors.white.withOpacityCompat( 0.9)
-                              : Colors.black.withOpacityCompat( 0.8),
+                              ? Colors.white.withOpacityCompat(0.9)
+                              : Colors.black.withOpacityCompat(0.8),
                           height: 1.4,
                         ),
                   ),
@@ -552,8 +552,8 @@ class _AiChatWidgetState extends State<AiChatWidget>
                   size: effectiveConfig.trailingIconSize,
                   color: effectiveConfig.trailingIconColor ??
                       (isDarkMode
-                          ? Colors.white.withOpacityCompat( 0.5)
-                          : primaryColor.withOpacityCompat( 0.5)),
+                          ? Colors.white.withOpacityCompat(0.5)
+                          : primaryColor.withOpacityCompat(0.5)),
                 ),
               ],
             ),
@@ -577,12 +577,12 @@ class _AiChatWidgetState extends State<AiChatWidget>
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
       decoration: BoxDecoration(
         color: isDarkMode
-            ? const Color(0xFF1E2026).withOpacityCompat( 0.9)
-            : Colors.white.withOpacityCompat( 0.9),
+            ? const Color(0xFF1E2026).withOpacityCompat(0.9)
+            : Colors.white.withOpacityCompat(0.9),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacityCompat( isDarkMode ? 0.2 : 0.06),
+            color: Colors.black.withOpacityCompat(isDarkMode ? 0.2 : 0.06),
             blurRadius: 15,
             offset: const Offset(0, 5),
             spreadRadius: -5,
@@ -590,8 +590,8 @@ class _AiChatWidgetState extends State<AiChatWidget>
         ],
         border: Border.all(
           color: isDarkMode
-              ? Colors.white.withOpacityCompat( 0.1)
-              : Colors.black.withOpacityCompat( 0.05),
+              ? Colors.white.withOpacityCompat(0.1)
+              : Colors.black.withOpacityCompat(0.05),
           width: 0.5,
         ),
       ),
@@ -644,8 +644,8 @@ class _AiChatWidgetState extends State<AiChatWidget>
     Color primaryColor,
   ) {
     final chipColor = isDarkMode
-        ? primaryColor.withOpacityCompat( 0.15 * 255)
-        : primaryColor.withOpacityCompat( 0.08 * 255);
+        ? primaryColor.withOpacityCompat(0.15 * 255)
+        : primaryColor.withOpacityCompat(0.08 * 255);
 
     return InkWell(
       onTap: () => handleExampleQuestionTap(question.question),
@@ -656,7 +656,7 @@ class _AiChatWidgetState extends State<AiChatWidget>
           color: chipColor,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: primaryColor.withOpacityCompat( 0.2 * 255),
+            color: primaryColor.withOpacityCompat(0.2 * 255),
             width: 1,
           ),
         ),
