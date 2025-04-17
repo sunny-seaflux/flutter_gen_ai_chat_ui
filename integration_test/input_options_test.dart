@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen_ai_chat_ui/flutter_gen_ai_chat_ui.dart';
+import 'package:flutter_gen_ai_chat_ui/src/utils/color_extensions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -135,8 +136,7 @@ void main() {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color:
-                  Colors.black.withValues(red: 0, green: 0, blue: 0, alpha: 25),
+              color: Colors.black.withOpacityCompat(25 / 255),
               blurRadius: 10,
             ),
           ],
@@ -176,8 +176,8 @@ void main() {
       // Arrange: Create input options with glassmorphic effect
       final inputOptions = InputOptions.glassmorphic(
         colors: [
-          Colors.blue.withValues(red: 0, green: 0, blue: 255, alpha: 51),
-          Colors.purple.withValues(red: 128, green: 0, blue: 128, alpha: 51)
+          Colors.blue.withOpacityCompat(51 / 255),
+          Colors.purple.withOpacityCompat(51 / 255)
         ],
         borderRadius: 25.0,
         blurStrength: 5.0,

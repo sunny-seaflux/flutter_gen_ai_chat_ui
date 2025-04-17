@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen_ai_chat_ui/flutter_gen_ai_chat_ui.dart';
+import 'package:flutter_gen_ai_chat_ui/src/utils/color_extensions.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/app_state.dart';
@@ -164,13 +165,14 @@ class _BasicChatScreenState extends State<BasicChatScreen> {
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withOpacityCompat(0.1),
                 blurRadius: 10,
                 spreadRadius: -5,
               ),
             ],
             border: Border.all(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+              color:
+                  Theme.of(context).colorScheme.primary.withOpacityCompat(0.2),
               width: 1.5,
             ),
           ),

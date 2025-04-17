@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen_ai_chat_ui/src/utils/color_extensions.dart';
 import '../models/app_state.dart';
 
 /// A bottom sheet with settings options for the chat UI
@@ -25,7 +26,7 @@ class SettingsSheet extends StatelessWidget {
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
+                color: Colors.black.withOpacityCompat(0.2),
                 blurRadius: 20,
                 offset: const Offset(0, -4),
               ),
@@ -39,7 +40,7 @@ class SettingsSheet extends StatelessWidget {
                 width: 40,
                 height: 5,
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.onSurface.withOpacity(0.2),
+                  color: theme.colorScheme.onSurface.withOpacityCompat(0.2),
                   borderRadius: BorderRadius.circular(2.5),
                 ),
               ),
@@ -338,14 +339,14 @@ class SettingsSheet extends StatelessWidget {
               'Professional AI Assistant v1.0.0\n'
               'Powered by Flutter Gen AI Chat UI',
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.7),
+                color: theme.colorScheme.onSurface.withOpacityCompat(0.7),
               ),
             ),
             const SizedBox(height: 16),
             Text(
               'This is a comprehensive demo of the Flutter Gen AI Chat UI package showcasing its capabilities for building professional chat interfaces.',
               style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.6),
+                color: theme.colorScheme.onSurface.withOpacityCompat(0.6),
               ),
             ),
           ],

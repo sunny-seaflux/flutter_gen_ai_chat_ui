@@ -237,7 +237,7 @@ class _ChatScreenState extends State<ChatScreen>
                 showTime: true,
                 showUserName: true,
                 bubbleStyle: BubbleStyle(
-                  userBubbleColor: colorScheme.primary.withOpacity(0.12),
+                  userBubbleColor: colorScheme.primary.withOpacityCompat(0.12),
                   aiBubbleColor:
                       isDarkMode ? colorScheme.surface : Colors.white,
                   userNameColor: colorScheme.primary,
@@ -319,7 +319,8 @@ class _ChatScreenState extends State<ChatScreen>
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(isDarkMode ? 0.3 : 0.1),
+                      color: Colors.black
+                          .withOpacityCompat(isDarkMode ? 0.3 : 0.1),
                       blurRadius: 20,
                       spreadRadius: -4,
                       offset: const Offset(0, 8),
@@ -327,7 +328,7 @@ class _ChatScreenState extends State<ChatScreen>
                   ],
                   border: Border.all(
                     color: colorScheme.primary
-                        .withOpacity(isDarkMode ? 0.2 : 0.15),
+                        .withOpacityCompat(isDarkMode ? 0.2 : 0.15),
                     width: 1.5,
                   ),
                 ),
@@ -345,8 +346,8 @@ class _ChatScreenState extends State<ChatScreen>
   InputOptions _buildInputOptions(ThemeData theme, bool isDarkMode) {
     // Create a more transparent background for the input field to blend with scaffold
     final textFieldBg = isDarkMode
-        ? theme.colorScheme.surface.withOpacity(0.7)
-        : Colors.white.withOpacity(0.7);
+        ? theme.colorScheme.surface.withOpacityCompat(0.7)
+        : Colors.white.withOpacityCompat(0.7);
 
     return InputOptions(
       // Use our controller

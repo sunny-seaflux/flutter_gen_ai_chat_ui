@@ -1,11 +1,11 @@
 name: flutter_gen_ai_chat_ui
-description: Flutter UI kit for AI chat interfaces with Markdown, code highlighting, streaming text, and extensive customization for GPT, Gemini, and other LLMs.
-version: 2.0.5
+description: Flutter package for high-performance AI chat UIs, with streaming markdown, code highlighting, extensive customization, and integration with LLMs like ChatGPT, Google Gemini, Anthropic Claude, and more.
+version: 2.0.6
 homepage: https://github.com/hooshyar/flutter_gen_ai_chat_ui
 repository: https://github.com/hooshyar/flutter_gen_ai_chat_ui
 issue_tracker: https://github.com/hooshyar/flutter_gen_ai_chat_ui/issues
 documentation: https://github.com/hooshyar/flutter_gen_ai_chat_ui/blob/main/README.md
-keywords: [chatbot, ai chat, llm, chatgpt, gemini, claude, chat ui, conversational ai, ai assistant, streaming text, markdown chat, code highlighting, flutter chat, openai, generative ai, language model, chat interface, ai ui]
+keywords: [flutter, flutter package, ai chat, chatbot, conversational ai, llm, chatgpt, gemini, claude, code highlighting, markdown, streaming text, customizable ui, performance, mobile sdk, pubdev]
 
 platforms:
   android:

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen_ai_chat_ui/flutter_gen_ai_chat_ui.dart';
 import 'package:network_image_mock/network_image_mock.dart';
+import 'package:flutter_gen_ai_chat_ui/src/utils/color_extensions.dart';
 
 void main() {
   group('Pagination and Loading Features', () {
@@ -201,8 +202,8 @@ void main() {
         // Glassmorphic input options
         final glassInputOptions = InputOptions.glassmorphic(
           colors: [
-            Colors.blue.withOpacity(0.4),
-            Colors.purple.withOpacity(0.4),
+            Colors.blue.withOpacityCompat(0.4),
+            Colors.purple.withOpacityCompat(0.4),
           ],
           borderRadius: 24.0,
           blurStrength: 1.0,

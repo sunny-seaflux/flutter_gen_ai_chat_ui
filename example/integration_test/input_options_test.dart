@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen_ai_chat_ui/flutter_gen_ai_chat_ui.dart';
+import 'package:flutter_gen_ai_chat_ui/src/utils/color_extensions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -133,11 +134,11 @@ void main() {
       final config = AiChatConfig(
         inputOptions: InputOptions(
           containerDecoration: BoxDecoration(
-            color: Colors.amber.withOpacity(0.2),
+            color: Colors.amber.withOpacityCompat(0.2),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withOpacityCompat(0.1),
                 blurRadius: 10,
               ),
             ],
@@ -161,7 +162,7 @@ void main() {
       for (final container in containers) {
         if (container.decoration is BoxDecoration) {
           final decoration = container.decoration as BoxDecoration;
-          if (decoration.color == Colors.amber.withOpacity(0.2) &&
+          if (decoration.color == Colors.amber.withOpacityCompat(0.2) &&
               decoration.borderRadius == BorderRadius.circular(20)) {
             foundMatchingContainer = true;
             break;
@@ -177,7 +178,10 @@ void main() {
       // Arrange: Create config with glassmorphic input options
       final config = AiChatConfig(
         inputOptions: InputOptions.glassmorphic(
-          colors: [Colors.blue.withOpacity(0.3), Colors.blue.withOpacity(0.2)],
+          colors: [
+            Colors.blue.withOpacityCompat(0.3),
+            Colors.blue.withOpacityCompat(0.2)
+          ],
           borderRadius: 25,
           blurStrength: 10,
           hintText: 'Type a message...',

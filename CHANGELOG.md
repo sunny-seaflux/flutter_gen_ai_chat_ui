@@ -272,3 +272,9 @@
 - Added `withOpacityCompat` extension for full compatibility with all Flutter/Dart SDKs.
 - Migrated all usages of `.withOpacity(x)` and `.withValues(alpha: x)` to `.withOpacityCompat(x)`.
 - No more build errors for users on Flutter <3.27.0.
+
+## [2.0.6] - 2024-06-20
+### Changed
+- Prepare for next release by bumping version to 2.0.6
+
+<!-- Next version changes go here -->

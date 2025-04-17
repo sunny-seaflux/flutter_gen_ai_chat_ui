@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen_ai_chat_ui/src/utils/color_extensions.dart';
 
 import '../models/app_state.dart';
 import '../widgets/settings_drawer.dart';
@@ -143,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen>
               },
               elevation: 0,
               backgroundColor: isDarkMode
-                  ? colorScheme.surface.withOpacity(0.9)
+                  ? colorScheme.surface.withOpacityCompat(0.9)
                   : colorScheme.surface,
               destinations: [
                 NavigationDestination(
@@ -367,7 +368,7 @@ class _HomeScreenState extends State<HomeScreen>
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: color.primary.withOpacity(0.1),
+                color: color.primary.withOpacityCompat(0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(

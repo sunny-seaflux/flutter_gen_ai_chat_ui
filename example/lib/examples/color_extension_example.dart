@@ -34,13 +34,16 @@ class ColorExtensionDemo extends StatelessWidget {
     // Various transformations using withValues
     final variants = [
       ColorVariant('Original', baseColor),
-      ColorVariant('Alpha 50%', baseColor.withOpacityCompat( 0.5)),
-      ColorVariant('Alpha 25%', baseColor.withOpacityCompat( 0.25)),
+      ColorVariant('Alpha 50%', baseColor.withOpacityCompat(0.5)),
+      ColorVariant('Alpha 25%', baseColor.withOpacityCompat(0.25)),
       ColorVariant('Red 255', baseColor.withValues(red: 255)),
       ColorVariant('Green 255', baseColor.withValues(green: 255)),
       ColorVariant('Blue 100', baseColor.withValues(blue: 100)),
-      ColorVariant('Multiple Changes',
-          baseColor.withValues(red: 200, green: 100, blue: 50, alpha: 0.8)),
+      ColorVariant(
+          'Multiple Changes',
+          baseColor
+              .withValues(red: 200, green: 100, blue: 50)
+              .withOpacityCompat(0.8)),
     ];
 
     return Scaffold(
@@ -90,7 +93,7 @@ class ColorTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withOpacityCompat(0.1),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),

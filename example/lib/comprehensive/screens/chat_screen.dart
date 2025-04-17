@@ -5,6 +5,7 @@ import 'package:flutter_gen_ai_chat_ui/flutter_gen_ai_chat_ui.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
+import 'package:flutter_gen_ai_chat_ui/src/utils/color_extensions.dart';
 
 import '../models/app_state.dart';
 import '../services/ai_service.dart';
@@ -194,8 +195,8 @@ class _ChatScreenState extends State<ChatScreen>
       code: TextStyle(
         fontFamily: 'monospace',
         backgroundColor: isDark
-            ? Colors.black.withOpacity(0.3)
-            : Colors.grey.withOpacity(0.2),
+            ? Colors.black.withOpacityCompat(0.3)
+            : Colors.grey.withOpacityCompat(0.2),
       ),
       codeblockDecoration: BoxDecoration(
         color: isDark ? Colors.black26 : Colors.grey.shade200,
@@ -209,7 +210,7 @@ class _ChatScreenState extends State<ChatScreen>
       showTime: true,
       showUserName: true,
       bubbleStyle: BubbleStyle(
-        userBubbleColor: theme.colorScheme.primary.withOpacity(0.15),
+        userBubbleColor: theme.colorScheme.primary.withOpacityCompat(0.15),
         aiBubbleColor: isDark
             ? theme.colorScheme.surfaceContainerHighest
             : theme.cardColor,
@@ -288,13 +289,14 @@ class _ChatScreenState extends State<ChatScreen>
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.3 : 0.1),
+            color: Colors.black.withOpacityCompat(isDark ? 0.3 : 0.1),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
         ],
         border: Border.all(
-          color: theme.colorScheme.primary.withOpacity(isDark ? 0.2 : 0.1),
+          color:
+              theme.colorScheme.primary.withOpacityCompat(isDark ? 0.2 : 0.1),
           width: 1.5,
         ),
       ),
