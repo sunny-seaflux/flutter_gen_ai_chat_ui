@@ -1,14 +1,13 @@
 import 'dart:async';
-import '../utils/color_extensions.dart';
 
 import 'package:flutter/material.dart';
-import '../utils/color_extensions.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 import '../controllers/chat_messages_controller.dart';
 import '../models/chat/models.dart';
 import '../models/input_options.dart';
+import '../utils/color_extensions.dart';
 import '../utils/font_helper.dart';
 import 'message_content_text.dart';
 
@@ -309,8 +308,8 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
 
     // Premium design colors for a sophisticated look
     final defaultUserBubbleColor = isDark
-        ? primaryColor.withOpacityCompat( 0.18)
-        : primaryColor.withOpacityCompat( 0.06);
+        ? primaryColor.withOpacityCompat(0.18)
+        : primaryColor.withOpacityCompat(0.06);
     final defaultAiBubbleColor =
         isDark ? const Color(0xFF2D2D2D) : Colors.white;
 
@@ -351,11 +350,11 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
 
     // Enhanced text colors with precise opacity for readability
     final userTextColor = isDark
-        ? Colors.white.withOpacityCompat( 0.96)
-        : Colors.black.withOpacityCompat( 0.86);
+        ? Colors.white.withOpacityCompat(0.96)
+        : Colors.black.withOpacityCompat(0.86);
     final aiTextColor = isDark
-        ? Colors.white.withOpacityCompat( 0.96)
-        : Colors.black.withOpacityCompat( 0.86);
+        ? Colors.white.withOpacityCompat(0.96)
+        : Colors.black.withOpacityCompat(0.86);
 
     final textColor = isUser ? userTextColor : aiTextColor;
 
@@ -371,7 +370,7 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
     final boxShadow = bubbleStyle.enableShadow
         ? [
             BoxShadow(
-              color: Colors.black.withOpacityCompat( isUser ? 0.04 : 0.06),
+              color: Colors.black.withOpacityCompat(isUser ? 0.04 : 0.06),
               blurRadius: isUser ? 4 : 8,
               offset: Offset(0, isUser ? 1 : 2),
               spreadRadius: isUser ? 0 : 1,
@@ -640,8 +639,8 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
                 color:
                     isDark ? const Color(0xFF79C0FF) : const Color(0xFF0550AE),
                 backgroundColor: isDark
-                    ? const Color(0xFF0D1117).withOpacityCompat( 0.6)
-                    : const Color(0xFFF6F8FA).withOpacityCompat( 0.8),
+                    ? const Color(0xFF0D1117).withOpacityCompat(0.6)
+                    : const Color(0xFFF6F8FA).withOpacityCompat(0.8),
                 fontFamily: 'monospace',
                 letterSpacing: 0,
                 height: 1.5,
@@ -658,7 +657,7 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacityCompat( isDark ? 0.2 : 0.05),
+                    color: Colors.black.withOpacityCompat(isDark ? 0.2 : 0.05),
                     blurRadius: 8,
                     offset: const Offset(0, 3),
                   ),
@@ -900,7 +899,7 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacityCompat( 0.08),
+                    color: Colors.black.withOpacityCompat(0.08),
                     blurRadius: 8,
                     spreadRadius: 1,
                     offset: const Offset(0, 2),

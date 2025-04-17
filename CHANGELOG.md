@@ -1,3 +1,25 @@
+## 2.0.8 - [2024-06-22] Pub Points & Static Analysis Fixes
+
+### Changed
+- Bumped package version to 2.0.8
+- Shortened pubspec description for pub.dev guidelines
+- Added valid issue_tracker URL
+
+### Fixed
+- Removed duplicate import in custom_chat_widget.dart
+- Simplified withOpacityCompat implementation
+- Resolved all static analysis warnings
+
+## 2.0.7 - [2024-06-21] Pub Points & Static Analysis Fixes
+
+### Changed
+- Shortened pubspec description for pub.dev guidelines
+
+### Fixed
+- Removed duplicate import in custom_chat_widget.dart
+- Removed deprecated withOpacity fallback in color_extensions.dart
+- All static analysis warnings resolved
+
 # Changelog
 
 ## 2.0.4 - [2024-07-05] Code Quality & Publication Improvements
