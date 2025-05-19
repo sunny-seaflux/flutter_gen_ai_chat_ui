@@ -378,9 +378,7 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
     final aiBubbleColor = bubbleStyle.aiBubbleColor ?? defaultAiBubbleColor;
 
     // Enhanced text colors with precise opacity for readability
-    final userTextColor = isDark
-        ? Colors.white.withOpacityCompat(0.96)
-        : Colors.black.withOpacityCompat(0.86);
+    final userTextColor = Colors.white.withOpacityCompat(0.96)
     final aiTextColor = isDark
         ? Colors.white.withOpacityCompat(0.96)
         : Colors.black.withOpacityCompat(0.86);
@@ -623,7 +621,7 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
   Widget _buildMessageContent(ChatMessage message, TextStyle textStyle) {
     final isRtlText = FontHelper.isRTL(message.text);
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final textColor = isDark ? Colors.white : Colors.black87;
+    final textColor = isDark ? Colors.white :  Colors.black87;
     final textDirection = isRtlText ? TextDirection.rtl : TextDirection.ltr;
 
     if (message.isMarkdown) {
