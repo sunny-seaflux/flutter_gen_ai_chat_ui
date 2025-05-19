@@ -621,7 +621,9 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
   Widget _buildMessageContent(ChatMessage message, TextStyle textStyle) {
     final isRtlText = FontHelper.isRTL(message.text);
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final textColor = isDark ? Colors.white :  Colors.black87;
+    final isUser = message.user.id == widget.currentUser.id;
+    final textColor = isUser ? Colors.white : Colors.black;
+
     final textDirection = isRtlText ? TextDirection.rtl : TextDirection.ltr;
 
     if (message.isMarkdown) {
