@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../controllers/chat_messages_controller.dart';
@@ -209,7 +209,7 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
 
     // Build the list with header/footer as needed
     return ListView.builder(
-      key: const PageStorageKey('chat_messages'),
+      // key: const PageStorageKey('chat_messages'),
       controller: _scrollController,
       reverse: paginationConfig.reverseOrder,
       physics: widget.messageListOptions.scrollPhysics ??
@@ -317,8 +317,6 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
           height: 1.5,
           letterSpacing: 0.2,
         ));
-
-    print('Text width: ${textSize.width}, height: ${textSize.height}');
 
     // Get effective decoration from MessageOptions
     final effectiveDecoration = widget.messageOptions.effectiveDecoration;
@@ -634,7 +632,7 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
       final markdownWidget = Markdown(
         key: ValueKey('markdown_${message.text.hashCode}'),
         data: message.text,
-        selectable: true,
+        selectable: false,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         onTapLink: (text, href, title) async {
