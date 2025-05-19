@@ -378,7 +378,7 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
     final aiBubbleColor = bubbleStyle.aiBubbleColor ?? defaultAiBubbleColor;
 
     // Enhanced text colors with precise opacity for readability
-    final userTextColor = Colors.white.withOpacityCompat(0.96)
+    final userTextColor = Colors.white.withOpacityCompat(0.96);
     final aiTextColor = isDark
         ? Colors.white.withOpacityCompat(0.96)
         : Colors.black.withOpacityCompat(0.86);
