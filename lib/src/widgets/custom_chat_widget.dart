@@ -750,7 +750,7 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
               listBullet: TextStyle(
                 fontSize: 16,
                 color:
-                    isDark ? const Color(0xFF79C0FF) : const Color(0xFF0969DA),
+                    Colors.black,
               ),
             ),
       );
