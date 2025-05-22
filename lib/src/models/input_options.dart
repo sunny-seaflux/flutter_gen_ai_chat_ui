@@ -414,10 +414,10 @@ class InputOptions {
     return IconButton(
       icon: Icon(
         sendButtonIcon,
-        size: 56,
+        size: sendButtonIconSize,
         color: sendButtonColor,
       ),
-      padding: const EdgeInsets.all(14.0),
+      padding: const EdgeInsets.all(20.0),
       onPressed: onSend,
     );
   }
