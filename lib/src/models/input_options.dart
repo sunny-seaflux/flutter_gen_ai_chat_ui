@@ -416,7 +416,6 @@ class InputOptions {
         sendButtonIcon,
         size: 56,
         color: sendButtonColor,
-        backgroundColor: Colors.red,
       ),
       padding: const EdgeInsets.all(14.0),
       onPressed: onSend,
