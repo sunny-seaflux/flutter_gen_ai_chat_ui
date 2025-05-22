@@ -100,15 +100,16 @@ class ChatInput extends StatelessWidget {
           child: textField,
         ),
         // Adjust send button to match text field height
-        Container(
-          // Match the height to align with text field
-          height: options.inputHeight ??
-              (options.decoration?.contentPadding?.vertical ?? 14) +
-                  24, // Base height approximation
-          // Center the button vertically
-          alignment: Alignment.center,
-          child: options.effectiveSendButtonBuilder(onSend),
-        ),
+        // Container(
+        //   // Match the height to align with text field
+        //   height: options.inputHeight ??
+        //       (options.decoration?.contentPadding?.vertical ?? 14) +
+        //           24, // Base height approximation
+        //   // Center the button vertically
+        //   alignment: Alignment.center,
+        //   child: options.effectiveSendButtonBuilder(onSend),
+        // ),
+        options.effectiveSendButtonBuilder(onSend)
       ],
     );
 
