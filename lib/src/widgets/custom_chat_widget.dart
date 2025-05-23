@@ -541,69 +541,6 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
                               ),
 
                             // Show premium copy button for AI messages
-                            if (!isUser &&
-                                (widget.messageOptions.showCopyButton ?? false))
-                              Material(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(16),
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(16),
-                                  onTap: () {
-                                    Clipboard.setData(
-                                        ClipboardData(text: message.text));
-                                    // Show premium feedback if provided
-                                    if (widget.messageOptions.onCopy != null) {
-                                      widget
-                                          .messageOptions.onCopy!(message.text);
-                                    } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: const Text(
-                                              'Message copied to clipboard'),
-                                          duration: const Duration(seconds: 2),
-                                          behavior: SnackBarBehavior.floating,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                          backgroundColor: isDark
-                                              ? Colors.grey[800]
-                                              : Colors.grey[900],
-                                        ),
-                                      );
-                                    }
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                      vertical: 4,
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Icon(
-                                          Icons.copy_outlined,
-                                          size: 14,
-                                          color: bubbleStyle.copyIconColor ??
-                                              primaryColor,
-                                        ),
-                                        const SizedBox(width: 4),
-                                        Text(
-                                          'Copy',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            letterSpacing: 0.1,
-                                            color: bubbleStyle.copyIconColor ??
-                                                primaryColor,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
                           ],
                         ),
                       ),
@@ -613,6 +550,63 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
               ),
             ),
           ),
+          if (!isUser && (widget.messageOptions.showCopyButton ?? false))
+            Material(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(16),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 18.0),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(16),
+                  onTap: () {
+                    Clipboard.setData(ClipboardData(text: message.text));
+                    // Show premium feedback if provided
+                    if (widget.messageOptions.onCopy != null) {
+                      widget.messageOptions.onCopy!(message.text);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: const Text('Message copied to clipboard'),
+                          duration: const Duration(seconds: 2),
+                          behavior: SnackBarBehavior.floating,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          backgroundColor:
+                              isDark ? Colors.grey[800] : Colors.grey[900],
+                        ),
+                      );
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 0,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.copy_outlined,
+                          size: 14,
+                          color: bubbleStyle.copyIconColor ?? primaryColor,
+                        ),
+                        const SizedBox(width: 4),
+                        // Text(
+                        //   'Copy',
+                        //   style: TextStyle(
+                        //     fontSize: 12,
+                        //     letterSpacing: 0.1,
+                        //     color: bubbleStyle.copyIconColor ?? primaryColor,
+                        //     fontWeight: FontWeight.w500,
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
@@ -747,10 +741,9 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
               img: const TextStyle(
                 fontSize: 0, // Hide image alt text
               ),
-              listBullet: TextStyle(
+              listBullet: const TextStyle(
                 fontSize: 16,
-                color:
-                    Colors.black,
+                color: Colors.black,
               ),
             ),
       );
