@@ -70,7 +70,10 @@ class ChatInput extends StatelessWidget {
       onChanged: options.onChanged,
       inputFormatters: options.inputFormatters,
       mouseCursor: options.mouseCursor,
-      contextMenuBuilder: options.contextMenuBuilder,
+       contextMenuBuilder: options.contextMenuBuilder ??
+          (context, editableTextState) =>
+              AdaptiveTextSelectionToolbar.editableText(
+                  editableTextState: editableTextState),
       undoController: options.undoController,
       spellCheckConfiguration: options.spellCheckConfiguration,
       magnifierConfiguration: options.magnifierConfiguration,
