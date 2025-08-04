@@ -12,6 +12,7 @@ class ChatInput extends StatelessWidget {
     required this.onSend,
     required this.options,
     this.focusNode,
+    this.enabled,
   });
 
   /// The text editing controller.
@@ -25,6 +26,8 @@ class ChatInput extends StatelessWidget {
 
   /// Optional focus node for the text field.
   final FocusNode? focusNode;
+
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {

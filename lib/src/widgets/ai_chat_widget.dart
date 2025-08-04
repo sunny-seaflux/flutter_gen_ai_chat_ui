@@ -48,6 +48,8 @@ class AiChatWidget extends StatefulWidget {
     this.streamingDuration = const Duration(milliseconds: 30),
     this.markdownStyleSheet,
     this.aiName = 'AI',
+    this.enabled,
+    this.onActionDataChanged,
   });
 
   /// The current user in the conversation
@@ -128,6 +130,11 @@ class AiChatWidget extends StatefulWidget {
 
   /// Style sheet for markdown rendering
   final MarkdownStyleSheet? markdownStyleSheet;
+
+  final bool? enabled;
+
+  final Function(Map<String, dynamic>)? onActionDataChanged;
+
 
   @override
   State<AiChatWidget> createState() => _AiChatWidgetState();
@@ -311,6 +318,10 @@ class _AiChatWidgetState extends State<AiChatWidget>
                                   (widget.loadingConfig?.isLoading ?? false)
                                       ? widget.loadingConfig?.loadingIndicator
                                       : null,
+		      onActionDataChanged: (dynamic data) {
+                                print("==========custom");
+                                widget.onActionDataChanged?.call(data);
+                              },
                             ),
                           ),
                           if ((widget.loadingConfig?.isLoading ?? false) &&
@@ -735,6 +746,7 @@ class _AiChatWidgetState extends State<AiChatWidget>
       focusNode: _inputFocusNode,
       options: effectiveInputOptions,
       onSend: _handleSubmitted,
+      enabled: widget.enabled
     );
   }
 

@@ -12,6 +12,10 @@ import '../models/input_options.dart';
 import '../utils/color_extensions.dart';
 import '../utils/font_helper.dart';
 import 'message_content_text.dart';
+import 'package:billspace/src/models/chat/chat_response_model.dart';
+import 'package:billspace/src/navigation/routes.dart';
+import 'package:billspace/src/presentation/bills/bill_detail_route.dart';
+import 'package:billspace/src/models/bills/subscription_model.dart';
 
 class CustomChatWidget extends StatefulWidget {
   final ChatUser currentUser;
@@ -25,25 +29,28 @@ class CustomChatWidget extends StatefulWidget {
   final QuickReplyOptions quickReplyOptions;
   final ScrollToBottomOptions scrollToBottomOptions;
   final ChatMessagesController? controller;
+  final ActionModel? actionData;
+  final Function(Map<String, dynamic>)? onActionDataChanged;
 
   /// Custom widget to display instead of the default typing indicator
   final Widget? typingIndicator;
 
-  const CustomChatWidget({
-    super.key,
-    required this.currentUser,
-    required this.messages,
-    required this.onSend,
-    required this.messageOptions,
-    this.inputOptions = const InputOptions(),
-    required this.typingUsers,
-    required this.messageListOptions,
-    required this.readOnly,
-    required this.quickReplyOptions,
-    required this.scrollToBottomOptions,
-    this.typingIndicator,
-    this.controller,
-  });
+  const CustomChatWidget(
+      {super.key,
+      required this.currentUser,
+      required this.messages,
+      required this.onSend,
+      required this.messageOptions,
+      this.inputOptions = const InputOptions(),
+      required this.typingUsers,
+      required this.messageListOptions,
+      required this.readOnly,
+      required this.quickReplyOptions,
+      required this.scrollToBottomOptions,
+      this.typingIndicator,
+      this.controller,
+      this.actionData,
+      this.onActionDataChanged});
 
   @override
   State<CustomChatWidget> createState() => _CustomChatWidgetState();
@@ -549,67 +556,103 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
                                 borderRadius: BorderRadius.circular(16),
                                 child: Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 5, bottom: 10),
-                                  child: InkWell(
-                                    borderRadius: BorderRadius.circular(16),
-                                    onTap: () async {
-                                      if (Platform.isAndroid) {
-                                        FocusScope.of(context).unfocus();
-                                        await Future.delayed(
-                                            const Duration(milliseconds: 1000));
-                                      }
+                                      left: 15, bottom: 10),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      // Copy Button
+                                      InkWell(
+                                        borderRadius: BorderRadius.circular(16),
+                                        onTap: () async {
+                                          if (Platform.isAndroid) {
+                                            FocusScope.of(context).unfocus();
+                                            await Future.delayed(const Duration(
+                                                milliseconds: 1000));
+                                          }
 
-                                      FocusScope.of(context).unfocus();
-                                      Clipboard.setData(
-                                          ClipboardData(text: message.text));
-                                      // Show premium feedback if provided
-                                      if (widget.messageOptions.onCopy !=
-                                          null) {
-                                        widget.messageOptions
-                                            .onCopy!(message.text);
-                                      } else {
-                                        if (Platform.isIOS) {
-                                          await Future.delayed(const Duration(
-                                              milliseconds: 500));
-                                          FocusScope.of(context).unfocus();
-                                        }
+                                          Clipboard.setData(ClipboardData(
+                                              text: message.text));
+                                          if (widget.messageOptions.onCopy !=
+                                              null) {
+                                            widget.messageOptions
+                                                .onCopy!(message.text);
+                                          } else {
+                                            if (Platform.isIOS) {
+                                              await Future.delayed(
+                                                  const Duration(
+                                                      milliseconds: 500));
+                                              FocusScope.of(context).unfocus();
+                                            }
 
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: const Text(
-                                                'Message copied to clipboard'),
-                                            duration:
-                                                const Duration(seconds: 2),
-                                            behavior: SnackBarBehavior.floating,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: const Text(
+                                                    'Message copied to clipboard'),
+                                                duration:
+                                                    const Duration(seconds: 2),
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                backgroundColor: isDark
+                                                    ? Colors.grey[800]
+                                                    : Colors.grey[900],
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.copy_outlined,
+                                              size: 14,
+                                              color:
+                                                  bubbleStyle.copyIconColor ??
+                                                      primaryColor,
                                             ),
-                                            backgroundColor: isDark
-                                                ? Colors.grey[800]
-                                                : Colors.grey[900],
-                                          ),
-                                        );
-                                      }
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                        vertical: 0,
+                                            const SizedBox(width: 4),
+                                            Text(
+                                              'Copy',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                letterSpacing: 0.1,
+                                                color:
+                                                    bubbleStyle.copyIconColor ??
+                                                        primaryColor,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Icon(
-                                            Icons.copy_outlined,
-                                            size: 14,
-                                            color: bubbleStyle.copyIconColor ??
-                                                primaryColor,
-                                          ),
-                                          const SizedBox(width: 4),
-                                          Text(
-                                            'Copy',
+
+                                      const SizedBox(width: 20),
+
+                                      // Action Title
+
+                                      if (message?.customProperties != null &&
+                                          message?.customProperties?[
+                                                  "actionData"] !=
+                                              null)
+                                        GestureDetector(
+                                          onTap: () {
+                                            if (message?.customProperties !=
+                                                    null &&
+                                                message.customProperties?[
+                                                        "actionData"] !=
+                                                    null) {
+                                              widget.onActionDataChanged?.call(
+                                                  message?.customProperties?[
+                                                      "actionData"]);
+                                            }
+                                          },
+                                          child: Text(
+                                            message?.customProperties?[
+                                                    "actionData"]["title"] ??
+                                                '',
                                             style: TextStyle(
                                               fontSize: 12,
                                               letterSpacing: 0.1,
@@ -619,12 +662,12 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
+                                        ),
+                                    ],
                                   ),
                                 ),
                               ),
+                            // copy button end
                           ],
                         ),
                       ),
