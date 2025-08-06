@@ -60,6 +60,7 @@ class ChatInput extends StatelessWidget {
       selectionControls: options.selectionControls,
       onTap: options.onTap,
       onEditingComplete: options.onEditingComplete,
+      enabled: enabled,
       onSubmitted: (text) {
         // Implement sendOnEnter functionality
         if (options.sendOnEnter && controller.text.trim().isNotEmpty) {
