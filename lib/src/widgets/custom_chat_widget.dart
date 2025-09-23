@@ -31,6 +31,8 @@ class CustomChatWidget extends StatefulWidget {
   final ChatMessagesController? controller;
   final ActionModel? actionData;
   final Function(Map<String, dynamic>)? onActionDataChanged;
+  final Function(String url, String uuid)? onActionUrlChanged;
+
 
   /// Custom widget to display instead of the default typing indicator
   final Widget? typingIndicator;
@@ -50,6 +52,7 @@ class CustomChatWidget extends StatefulWidget {
       this.typingIndicator,
       this.controller,
       this.actionData,
+      this.onActionUrlChanged,
       this.onActionDataChanged});
 
   @override
@@ -756,11 +759,27 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
         selectable: false,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        onTapLink: (text, href, title) async {
+       onTapLink: (text, href, title) async {
+          debugPrint('=============text success$text');
+          debugPrint('=============url success$href');
+          debugPrint('============= titel $title');
           if (href != null) {
+            debugPrint('============= message ${message}');
+            debugPrint(
+                '============= message.customProperties ${message.customProperties}');
+            debugPrint(
+                '============= message.customPropertiesidd ${message.customProperties?['id']}');
+
+            widget.onActionUrlChanged
+                ?.call(href, message.customProperties?['id']);
+
             final uri = Uri.tryParse(href);
+            debugPrint('============= uri ${uri}');
+
             if (uri != null && await canLaunchUrl(uri)) {
-              await launchUrl(uri, mode: LaunchMode.externalApplication);
+              debugPrint('============= uri next ${uri}');
+
+              unawaited(launchUrl(uri, mode: LaunchMode.externalApplication));
             }
           }
         },

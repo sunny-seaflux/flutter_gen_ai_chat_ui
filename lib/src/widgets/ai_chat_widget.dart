@@ -50,6 +50,8 @@ class AiChatWidget extends StatefulWidget {
     this.aiName = 'AI',
     this.enabled,
     this.onActionDataChanged,
+    this.onActionUrlChanged
+
   });
 
   /// The current user in the conversation
@@ -134,6 +136,9 @@ class AiChatWidget extends StatefulWidget {
   final bool? enabled;
 
   final Function(Map<String, dynamic>)? onActionDataChanged;
+
+  final Function(String url, String uuid)? onActionUrlChanged;
+
 
 
   @override
@@ -321,6 +326,9 @@ class _AiChatWidgetState extends State<AiChatWidget>
 		      onActionDataChanged: (dynamic data) {
                                 print("==========custom");
                                 widget.onActionDataChanged?.call(data);
+                              },
+                              onActionUrlChanged: (url, uuid) {
+                                widget.onActionUrlChanged?.call(url, uuid);
                               },
                             ),
                           ),
