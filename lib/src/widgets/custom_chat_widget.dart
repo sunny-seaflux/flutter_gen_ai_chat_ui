@@ -16,6 +16,8 @@ import 'package:billspace/src/models/chat/chat_response_model.dart';
 import 'package:billspace/src/navigation/routes.dart';
 import 'package:billspace/src/presentation/bills/bill_detail_route.dart';
 import 'package:billspace/src/models/bills/subscription_model.dart';
+import 'package:billspace/generated/l10n.dart';
+
 
 class CustomChatWidget extends StatefulWidget {
   final ChatUser currentUser;
@@ -618,7 +620,7 @@ class _CustomChatWidgetState extends State<CustomChatWidget> {
                                             ),
                                             const SizedBox(width: 4),
                                             Text(
-                                              'Copy',
+                                              Strings.current.copy,
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 letterSpacing: 0.1,
